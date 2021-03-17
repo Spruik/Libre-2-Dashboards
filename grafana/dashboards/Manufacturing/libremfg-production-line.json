@@ -1,0 +1,1303 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "aliasBy": "",
+        "annotationTags": "$field_reasonCode",
+        "annotationText": "$field_reasonText",
+        "annotationTitle": "$field_reasonCode",
+        "constant": 6.5,
+        "dataPath": "getEquipment.events",
+        "datasource": "LibreMfg-ManufacturingGraph",
+        "enable": false,
+        "groupBy": "",
+        "hide": false,
+        "iconColor": "#FFEE52",
+        "limit": 100,
+        "name": "events",
+        "queryText": "query{\n  getEquipment(id:\"$lineid\"){\n    name\n    events{\n      equipment{name}\n      id\n      Time:startDateTime\n      TimeEnd:endDateTime\n      duration\n      reasonCode\n      reasonText\n      comments\n      }\n  }\n}",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
+      },
+      {
+        "aliasBy": "",
+        "annotationTags": "",
+        "annotationText": "Requested Quantity $field_jobOrder.quantity",
+        "annotationTitle": "$field_jobOrder.operationsSegment.operationsDefinition.material.code - $field_jobOrder.operationsSegment.operationsDefinition.material.description",
+        "constant": 6.5,
+        "dataPath": "getEquipment.jobResponses",
+        "datasource": "LibreMfg-ManufacturingGraph",
+        "enable": true,
+        "groupBy": "",
+        "hide": false,
+        "iconColor": "#C0D8FF",
+        "limit": 100,
+        "name": "orders",
+        "queryText": "query{\n  getEquipment(id:\"$lineid\"){\n    name\n    jobResponses{\n      Time:startDateTime\n      TimeEnd:endDateTime\n      jobOrder{\n        quantity\n        operationsSegment{\n          operationsDefinition{\n            material{\n              code\n              description\n            }\n          }\n        }\n      }\n   }\n  }\n}",
+        "showIn": 0,
+        "tags": [],
+        "type": "tags"
+      },
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 1,
+  "iteration": 1616004063940,
+  "links": [],
+  "panels": [
+    {
+      "datasource": "-- Dashboard --",
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {},
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Unrecorded"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Recorded Downtime"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dtdhms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Unrecorded Downtime"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dtdhms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "OEE"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percentunit"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Recorded Working Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dtdhms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Standard Working Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dtdhms"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "vertical",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "value_and_name"
+      },
+      "pluginVersion": "7.4.1",
+      "targets": [
+        {
+          "panelId": 2,
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "actualDuration": false,
+              "downtime.count": true,
+              "downtime.durationSum": false,
+              "endDateTime": true,
+              "jobOrder.name": true,
+              "jobOrder.operationsSegment.duration": false,
+              "jobOrder.quantity": false,
+              "jobOrder.scheduledDuration": true,
+              "jobOrder.scheduledEndDateTime": true,
+              "jobOrder.scheduledStartDateTime": true,
+              "produced.count": true,
+              "produced.quantitySum": false,
+              "rework.count": true,
+              "rework.quantitySum": true,
+              "scrap.count": true,
+              "scrap.quantitySum": true,
+              "startDateTime": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "actualDuration (sum)": "actualDuration",
+              "downtime.durationSum (sum)": "downtime.durationSum",
+              "equipment.name": "",
+              "jobOrder.operationsSegment.duration (sum)": "jobOrder.operationsSegment.duration",
+              "jobOrder.quantity (sum)": "jobOrder.quantity",
+              "jobOrder.scheduledDuration (sum)": "jobOrder.scheduledDuration",
+              "produced.count (sum)": "produced.count",
+              "produced.quantitySum (sum)": "produced.quantitySum",
+              "rework.count (sum)": "rework.count",
+              "rework.quantitySum (sum)": "rework.quantitySum",
+              "scrap (sum)": "scrap"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Qty Variance",
+            "binary": {
+              "left": "produced.quantitySum",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "jobOrder.quantity"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "RuntimeMins",
+            "binary": {
+              "left": "produced.quantitySum",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "jobOrder.operationsSegment.duration"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Runtime",
+            "binary": {
+              "left": "RuntimeMins",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "60"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "TotalDowntime",
+            "binary": {
+              "left": "actualDuration",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "Runtime"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Unrecorded Downtime",
+            "binary": {
+              "left": "TotalDowntime",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "downtime.durationSum"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Unrecorded",
+            "binary": {
+              "left": "Unrecorded Downtime",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "TotalDowntime"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "OEE",
+            "binary": {
+              "left": "Runtime",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "actualDuration"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "groupBy",
+          "options": {
+            "fields": {
+              "Qty Variance": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "Runtime": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "TotalDowntime": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "Unrecorded Downtime": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "actualDuration": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "downtime.durationSum": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "equipment.name": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
+              "jobOrder.quantity": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "produced.quantitySum": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
+              "scrap": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              }
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Runtime": false,
+              "RuntimeMins": false,
+              "TotalDowntime": false,
+              "Unrecorded Downtime": false,
+              "actualDuration": false,
+              "jobOrder.operationsSegment.duration": false,
+              "jobOrder.quantity": false,
+              "jobOrder.scheduledDuration": true,
+              "produced.count": true,
+              "produced.quantitySum": false,
+              "rework.count": true,
+              "rework.quantitySum": true,
+              "scrap": true
+            },
+            "indexByName": {
+              "Qty Variance": 0,
+              "Runtime": 7,
+              "RuntimeMins": 6,
+              "TotalDowntime": 8,
+              "Unrecorded": 10,
+              "Unrecorded Downtime": 9,
+              "actualDuration": 3,
+              "downtime.durationSum": 4,
+              "jobOrder.operationsSegment.duration": 2,
+              "jobOrder.quantity": 1,
+              "produced.quantitySum": 5
+            },
+            "renameByName": {
+              "Qty Variance (sum)": "",
+              "Runtime (sum)": "Runtime",
+              "TotalDowntime (sum)": "total downtime",
+              "Unrecorded": "",
+              "Unrecorded Downtime (sum)": "unrecorded downtime",
+              "actualDuration": "",
+              "actualDuration (sum)": "actualDuration",
+              "downtime.durationSum": "Recorded Downtime",
+              "downtime.durationSum (sum)": "recorded downtime",
+              "jobOrder.quantity (sum)": "jobOrder.quantity",
+              "produced.quantitySum": "",
+              "produced.quantitySum (sum)": "produced",
+              "scrap (sum)": "scrap"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "unrecorded",
+            "binary": {
+              "left": "unrecorded downtime",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "total downtime"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "OEE",
+            "binary": {
+              "left": "Runtime",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "actualDuration"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "equipment.name": true,
+              "scrap": true,
+              "total downtime": true
+            },
+            "indexByName": {
+              "OEE": 11,
+              "Qty Variance (sum)": 3,
+              "Runtime": 5,
+              "actualDuration": 4,
+              "equipment.name": 0,
+              "jobOrder.quantity": 1,
+              "produced": 2,
+              "recorded downtime": 6,
+              "scrap": 8,
+              "total downtime": 9,
+              "unrecorded": 10,
+              "unrecorded downtime": 7
+            },
+            "renameByName": {
+              "Runtime": "Standard Working Time",
+              "actualDuration": "Recorded Working Time",
+              "jobOrder.quantity": "Requested Quantity",
+              "produced": "Produced Qty",
+              "recorded downtime": "Recorded Downtime",
+              "scrap": "",
+              "unrecorded": "Unrecorded",
+              "unrecorded downtime": "Unrecorded Downtime"
+            }
+          }
+        }
+      ],
+      "transparent": true,
+      "type": "stat"
+    },
+    {
+      "datasource": "LibreMfg-ManufacturingGraph",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sch.Duration"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 98
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "actualDuration"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 109
+              },
+              {
+                "id": "unit",
+                "value": "dtdhms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Planned Qty"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 92
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Actual Qty"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 94
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Sch.Duration"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 80
+              },
+              {
+                "id": "unit",
+                "value": "dtdhms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Rework Qty"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 93
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "downtime.count"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 118
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Downtime"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dtdhms"
+              },
+              {
+                "id": "custom.width",
+                "value": 90
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Scrap Qty"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 115
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Runtime Seconds"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dtdhms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Unrecorded Downtime"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dtdhms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Material Code"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 108
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "scrap"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 76
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Std Rate"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 71
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "description"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 149
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Start"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 149
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Total Downtime"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dtdhms"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 10,
+        "w": 24,
+        "x": 0,
+        "y": 5
+      },
+      "id": 2,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": false,
+            "displayName": "Start"
+          }
+        ]
+      },
+      "pluginVersion": "7.4.1",
+      "targets": [
+        {
+          "aliasBy": "",
+          "annotationTags": "",
+          "annotationText": "",
+          "annotationTitle": "",
+          "constant": 6.5,
+          "dataPath": "getEquipment.jobResponses",
+          "groupBy": "",
+          "hide": true,
+          "queryText": "query{\n  getEquipment(id:\"$lineid\"){\n    id\n    name\n    jobResponses(filter:{endDateTime:{le:\"${__to:date:iso}\"},startDateTime:{ge:\"${__from:date:iso}\"}}){\n      equipment { name }\n      jobOrder{\n        name\n        scheduledStartDateTime\n        scheduledEndDateTime \n        scheduledDuration\n        quantity \n        operationsSegment{\n          duration\n          operationsDefinition{\n            material {\n              code\n              description\n            }\n          }\n        }\n      }\n      startDateTime\n      endDateTime\n      actualDuration \n      downtime:eventsAggregate{\n        count\n        durationSum\n      }\n      scrap:quantitiesAggregate(filter:{type:{eq:Scrap}}){\n        count\n        quantitySum\n      }\n      rework:quantitiesAggregate(filter:{type:{eq:Rework}}){\n        count\n        quantitySum\n      }\n      produced:quantitiesAggregate(filter:{type:{eq:Produced}}){\n        count\n        quantitySum\n      }\n    }\n  }\n}",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Orders",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "equipment.name": true,
+              "jobOrder.scheduledEndDateTime": true,
+              "jobOrder.scheduledStartDateTime": true,
+              "produced.count": true,
+              "rework.count": true,
+              "scrap.count": true
+            },
+            "indexByName": {
+              "actualDuration": 8,
+              "downtime.count": 13,
+              "downtime.durationSum": 12,
+              "endDateTime": 6,
+              "equipment.name": 16,
+              "jobOrder.name": 2,
+              "jobOrder.operationsSegment.duration": 17,
+              "jobOrder.operationsSegment.operationsDefinition.material.code": 0,
+              "jobOrder.operationsSegment.operationsDefinition.material.description": 1,
+              "jobOrder.quantity": 9,
+              "jobOrder.scheduledDuration": 7,
+              "jobOrder.scheduledEndDateTime": 4,
+              "jobOrder.scheduledStartDateTime": 3,
+              "produced.count": 15,
+              "produced.quantitySum": 10,
+              "rework.count": 14,
+              "rework.quantitySum": 11,
+              "scrap": 18,
+              "startDateTime": 5
+            },
+            "renameByName": {
+              "actualDuration": "",
+              "createdDateTime": "timestamp",
+              "downtime.count": "",
+              "downtime.durationSum": "Downtime",
+              "endDateTime": "End",
+              "equipment.name": "Equipment",
+              "jobOrder.name": "Order",
+              "jobOrder.operationsSegment.StdRate": "Std. Rate",
+              "jobOrder.operationsSegment.duration": "Std Rate",
+              "jobOrder.operationsSegment.operationsDefinition.material.code": "Material Code",
+              "jobOrder.operationsSegment.operationsDefinition.material.description": "description",
+              "jobOrder.quantity": "Planned Qty",
+              "jobOrder.scheduledDuration": "Sch.Duration",
+              "jobOrder.scheduledEndDateTime": "Sch.End",
+              "jobOrder.scheduledStartDateTime": "Sch.Start",
+              "operator": "",
+              "produced.quantitySum": "Actual Qty",
+              "rework.quantitySum": "Rework Qty",
+              "scrap": "",
+              "scrap.count": "",
+              "scrap.quantitySum": "Scrap Qty",
+              "startDateTime": "Start"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Runtime Mins",
+            "binary": {
+              "left": "Actual Qty",
+              "operator": "/",
+              "reducer": "sum",
+              "right": "Std Rate"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Runtime Seconds",
+            "binary": {
+              "left": "Runtime Mins",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "60"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "End": true,
+              "Order": true,
+              "Runtime Mins": true,
+              "Sch.Duration": true,
+              "downtime.count": true
+            },
+            "indexByName": {
+              "Actual Qty": 8,
+              "Downtime": 11,
+              "End": 4,
+              "Material Code": 0,
+              "Order": 2,
+              "Planned Qty": 7,
+              "Rework Qty": 9,
+              "Runtime Mins": 14,
+              "Runtime Seconds": 15,
+              "Sch.Duration": 5,
+              "Start": 3,
+              "Std Rate": 13,
+              "actualDuration": 6,
+              "description": 1,
+              "downtime.count": 12,
+              "scrap": 10
+            },
+            "renameByName": {}
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Total Downtime",
+            "binary": {
+              "left": "actualDuration",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "Runtime Seconds"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Unrecorded Downtime",
+            "binary": {
+              "left": "Total Downtime",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "Downtime"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "LibreMfg-ManufacturingGraph",
+      "fieldConfig": {
+        "defaults": {
+          "custom": {}
+        },
+        "overrides": []
+      },
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 15
+      },
+      "hiddenSeries": false,
+      "id": 6,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "alertThreshold": true
+      },
+      "percentage": false,
+      "pluginVersion": "7.4.1",
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "aliasBy": "",
+          "annotationTags": "",
+          "annotationText": "",
+          "annotationTitle": "",
+          "constant": 6.5,
+          "dataPath": "getEquipment.events",
+          "groupBy": "",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "query": "// v.bucket, v.timeRangeStart, and v.timeRange stop are all variables supported by the flux plugin and influxdb\nfrom(bucket: v.bucket)\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_value\"] >= 10 and r[\"_value\"] <= 20)",
+          "queryText": "query{\n  getEquipment(id:\"$lineid\"){\n    events{\nTimestamp:startDateTime\nduration\n    }\n  }\n}",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "value"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "mean"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Events",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 27,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "allValue": null,
+        "current": null,
+        "datasource": null,
+        "definition": "query{\n  queryEquipment(filter:{not:{has:parent}}){\n    name\n  }\n} (queryEquipment)",
+        "description": "Sites",
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "site",
+        "multi": false,
+        "name": "site",
+        "options": [
+        ],
+        "query": {
+          "dataPath": "queryEquipment",
+          "queryText": "query{\n  queryEquipment(filter:{not:{has:parent}}){\n    name\n  }\n}"
+        },
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "0xf",
+          "value": "0xf"
+        },
+        "datasource": null,
+        "definition": "query{\n  queryEquipment(filter: { name: { eq:\"$site\"}}){\n    id\n  }\n} (queryEquipment)",
+        "description": "gets siteid from site name",
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": "siteid",
+        "multi": false,
+        "name": "siteid",
+        "options": [
+          {
+            "selected": true,
+            "text": "0xf",
+            "value": "0xf"
+          }
+        ],
+        "query": {
+          "dataPath": "queryEquipment",
+          "queryText": "query{\n  queryEquipment(filter: { name: { eq:\"$site\"}}){\n    id\n  }\n}"
+        },
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": null,
+        "datasource": "LibreMfg-ManufacturingGraph",
+        "definition": "query{\n  getEquipment(id:\"$siteid\"){\n    children{\n      name\n    }\n  }\n} (getEquipment.children)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Area",
+        "multi": false,
+        "name": "area",
+        "options": [],
+        "query": {
+          "aliasBy": "",
+          "annotationTags": "",
+          "annotationText": "",
+          "annotationTitle": "",
+          "constant": 6.5,
+          "dataPath": "getEquipment.children",
+          "groupBy": "",
+          "queryText": "query{\n  getEquipment(id:\"$siteid\"){\n    children{\n      name\n    }\n  }\n}"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 1,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "0x1f",
+          "value": "0x1f"
+        },
+        "datasource": null,
+        "definition": "query{\n  queryEquipment(filter: { name: { eq:\"$area\"}}){\n    id\n  }\n} (queryEquipment)",
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": "areaid",
+        "multi": false,
+        "name": "areaid",
+        "options": [
+          {
+            "selected": true,
+            "text": "0x1f",
+            "value": "0x1f"
+          }
+        ],
+        "query": {
+          "dataPath": "queryEquipment",
+          "queryText": "query{\n  queryEquipment(filter: { name: { eq:\"$area\"}}){\n    id\n  }\n}"
+        },
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": null,
+        "datasource": "LibreMfg-ManufacturingGraph",
+        "definition": "query{\n  getEquipment(id:\"$areaid\"){\n    children{\n      name\n    }\n  }\n} (getEquipment.children)",
+        "description": null,
+        "error": null,
+        "hide": 0,
+        "includeAll": false,
+        "label": "Line",
+        "multi": false,
+        "name": "line",
+        "options": [],
+        "query": {
+          "aliasBy": "",
+          "annotationTags": "",
+          "annotationText": "",
+          "annotationTitle": "",
+          "constant": 6.5,
+          "dataPath": "getEquipment.children",
+          "groupBy": "",
+          "queryText": "query{\n  getEquipment(id:\"$areaid\"){\n    children{\n      name\n    }\n  }\n}"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 5,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      },
+      {
+        "allValue": null,
+        "current": {
+          "selected": false,
+          "text": "0x4d",
+          "value": "0x4d"
+        },
+        "datasource": null,
+        "definition": "query{\n  queryEquipment(filter: { name: { eq:\"$line\"}}){\n    id\n  } \n} (queryEquipment)",
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "includeAll": false,
+        "label": "lineid",
+        "multi": false,
+        "name": "lineid",
+        "options": [
+          {
+            "selected": true,
+            "text": "0x4d",
+            "value": "0x4d"
+          }
+        ],
+        "query": {
+          "dataPath": "queryEquipment",
+          "queryText": "query{\n  queryEquipment(filter: { name: { eq:\"$line\"}}){\n    id\n  } \n}"
+        },
+        "refresh": 0,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
+  },
+  "time": {
+    "from": "2021-01-31T13:00:00.000Z",
+    "to": "2021-02-01T12:59:59.000Z"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Line Performance",
+  "uid": "libremfg-line-performance-v1",
+  "version": 1
+}

@@ -1,0 +1,6014 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 6,
+    "iteration": 1614647935092,
+    "links": [],
+    "panels": [
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 0
+        },
+        "id": 8,
+        "panels": [],
+        "repeat": "LINE",
+        "scopedVars": {
+          "LINE": null
+        },
+        "title": "$LINE",
+        "type": "row"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 4,
+          "x": 0,
+          "y": 1
+        },
+        "id": 4,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "OEE",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "The total count of different jobs executed on in the display time period.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 2,
+          "x": 4,
+          "y": 1
+        },
+        "id": 6,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/^Orders$/",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value"
+        },
+        "pluginVersion": "7.4.1",
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "Orders",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Runs",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 3,
+          "x": 6,
+          "y": 1
+        },
+        "id": 5,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ],
+              [
+                8320,
+                1612933579000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Produced",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 15
+                }
+              ]
+            },
+            "unit": "dthms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 3,
+          "x": 9,
+          "y": 1
+        },
+        "id": 29,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "Unrecorded Downtime",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ],
+              [
+                8320,
+                1612933579000
+              ],
+              [
+                82,
+                1612933992000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Unrecorded Downtime",
+        "type": "stat"
+      },
+      {
+        "aliasColors": {},
+        "bars": true,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "TestData DB",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 1
+        },
+        "hiddenSeries": false,
+        "id": 2,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": false,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.4.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "scopedVars": {
+          "LINE": null
+        },
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:256",
+            "alias": "Productive Time",
+            "color": "rgba(86, 166, 75, 0.8)"
+          },
+          {
+            "$$hashKey": "object:264",
+            "alias": "Planned Downtime",
+            "color": "rgba(220, 220, 220, 0.5)"
+          },
+          {
+            "$$hashKey": "object:428",
+            "alias": "Unplanned Downtime",
+            "color": "rgba(196, 22, 42, 0.45)"
+          },
+          {
+            "$$hashKey": "object:436",
+            "alias": "Rate Loss",
+            "color": "rgba(255, 152, 48, 0.5)"
+          },
+          {
+            "$$hashKey": "object:444",
+            "alias": "Quality Loss",
+            "color": "rgba(184, 119, 217, 0.5)"
+          },
+          {
+            "$$hashKey": "object:108",
+            "alias": "Unrecorded",
+            "color": "rgba(87, 148, 242, 0.5)"
+          }
+        ],
+        "spaceLength": 10,
+        "stack": true,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "Productive Time",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                23,
+                1610409600000
+              ],
+              [
+                19,
+                1610496000000
+              ],
+              [
+                35,
+                1610582400000
+              ],
+              [
+                23,
+                1610668800000
+              ],
+              [
+                27,
+                1610755200000
+              ],
+              [
+                25,
+                1611014400000
+              ],
+              [
+                45,
+                1611100800000
+              ],
+              [
+                39,
+                1611187200000
+              ],
+              [
+                15,
+                1611273600000
+              ],
+              [
+                16,
+                1611360000000
+              ],
+              [
+                26,
+                1611619200000
+              ],
+              [
+                25,
+                1611705600000
+              ],
+              [
+                23,
+                1611792000000
+              ],
+              [
+                34,
+                1611878400000
+              ],
+              [
+                39,
+                1611964800000
+              ],
+              [
+                27,
+                1612224000000
+              ],
+              [
+                19,
+                1612310400000
+              ],
+              [
+                30,
+                1612396800000
+              ],
+              [
+                39,
+                1612483200000
+              ],
+              [
+                21,
+                1612569600000
+              ],
+              [
+                26,
+                1612828800000
+              ],
+              [
+                33,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Quality Loss",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                2,
+                1610409600000
+              ],
+              [
+                2,
+                1610496000000
+              ],
+              [
+                1,
+                1610582400000
+              ],
+              [
+                0,
+                1610668800000
+              ],
+              [
+                1,
+                1610755200000
+              ],
+              [
+                2,
+                1611014400000
+              ],
+              [
+                0,
+                1611100800000
+              ],
+              [
+                3,
+                1611187200000
+              ],
+              [
+                0,
+                1611273600000
+              ],
+              [
+                3,
+                1611360000000
+              ],
+              [
+                2,
+                1611619200000
+              ],
+              [
+                2,
+                1611705600000
+              ],
+              [
+                2,
+                1611792000000
+              ],
+              [
+                1,
+                1611878400000
+              ],
+              [
+                1,
+                1611964800000
+              ],
+              [
+                2,
+                1612224000000
+              ],
+              [
+                9,
+                1612310400000
+              ],
+              [
+                1,
+                1612396800000
+              ],
+              [
+                1,
+                1612483200000
+              ],
+              [
+                1,
+                1612569600000
+              ],
+              [
+                1,
+                1612828800000
+              ],
+              [
+                1,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "B",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Unrecorded",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                25,
+                1610409600000
+              ],
+              [
+                40,
+                1610496000000
+              ],
+              [
+                36,
+                1610582400000
+              ],
+              [
+                27,
+                1610668800000
+              ],
+              [
+                30,
+                1610755200000
+              ],
+              [
+                24,
+                1611014400000
+              ],
+              [
+                35,
+                1611100800000
+              ],
+              [
+                32,
+                1611187200000
+              ],
+              [
+                34,
+                1611273600000
+              ],
+              [
+                38,
+                1611360000000
+              ],
+              [
+                27,
+                1611619200000
+              ],
+              [
+                22,
+                1611705600000
+              ],
+              [
+                35,
+                1611792000000
+              ],
+              [
+                35,
+                1611878400000
+              ],
+              [
+                33,
+                1611964800000
+              ],
+              [
+                32,
+                1612224000000
+              ],
+              [
+                23,
+                1612310400000
+              ],
+              [
+                35,
+                1612396800000
+              ],
+              [
+                30,
+                1612483200000
+              ],
+              [
+                22,
+                1612569600000
+              ],
+              [
+                40,
+                1612828800000
+              ],
+              [
+                32,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "C",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Unplanned Downtime",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                50,
+                1610409600000
+              ],
+              [
+                38,
+                1610496000000
+              ],
+              [
+                23,
+                1610582400000
+              ],
+              [
+                49,
+                1610668800000
+              ],
+              [
+                42,
+                1610755200000
+              ],
+              [
+                42,
+                1611014400000
+              ],
+              [
+                12,
+                1611100800000
+              ],
+              [
+                20,
+                1611187200000
+              ],
+              [
+                47,
+                1611273600000
+              ],
+              [
+                42,
+                1611360000000
+              ],
+              [
+                37,
+                1611619200000
+              ],
+              [
+                42,
+                1611705600000
+              ],
+              [
+                32,
+                1611792000000
+              ],
+              [
+                21,
+                1611878400000
+              ],
+              [
+                24,
+                1611964800000
+              ],
+              [
+                31,
+                1612224000000
+              ],
+              [
+                48,
+                1612310400000
+              ],
+              [
+                26,
+                1612396800000
+              ],
+              [
+                24,
+                1612483200000
+              ],
+              [
+                54,
+                1612569600000
+              ],
+              [
+                28,
+                1612828800000
+              ],
+              [
+                31,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "D",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Planned Downtime",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                0,
+                1610409600000
+              ],
+              [
+                1,
+                1610496000000
+              ],
+              [
+                5,
+                1610582400000
+              ],
+              [
+                1,
+                1610668800000
+              ],
+              [
+                0,
+                1610755200000
+              ],
+              [
+                7,
+                1611014400000
+              ],
+              [
+                8,
+                1611100800000
+              ],
+              [
+                6,
+                1611187200000
+              ],
+              [
+                4,
+                1611273600000
+              ],
+              [
+                1,
+                1611360000000
+              ],
+              [
+                8,
+                1611619200000
+              ],
+              [
+                9,
+                1611705600000
+              ],
+              [
+                8,
+                1611792000000
+              ],
+              [
+                9,
+                1611878400000
+              ],
+              [
+                3,
+                1611964800000
+              ],
+              [
+                8,
+                1612224000000
+              ],
+              [
+                1,
+                1612310400000
+              ],
+              [
+                8,
+                1612396800000
+              ],
+              [
+                6,
+                1612483200000
+              ],
+              [
+                2,
+                1612569600000
+              ],
+              [
+                5,
+                1612828800000
+              ],
+              [
+                3,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "E",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "thresholds": [
+          {
+            "$$hashKey": "object:662",
+            "colorMode": "custom",
+            "fill": true,
+            "fillColor": "rgba(242, 73, 92, 0.2)",
+            "line": true,
+            "lineColor": "rgba(255, 0, 46, 0.5)",
+            "op": "lt",
+            "value": 40,
+            "yaxis": "right"
+          }
+        ],
+        "timeFrom": "30d",
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "$LINE Production Losses",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:20",
+            "decimals": null,
+            "format": "percent",
+            "label": null,
+            "logBase": 1,
+            "max": "100",
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:21",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 7
+        },
+        "id": 30,
+        "panels": [],
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 8,
+        "scopedVars": {
+          "LINE": null
+        },
+        "title": "$LINE",
+        "type": "row"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 4,
+          "x": 0,
+          "y": 8
+        },
+        "id": 31,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 4,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "OEE",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "The total count of different jobs executed on in the display time period.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 2,
+          "x": 4,
+          "y": 8
+        },
+        "id": 32,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/^Orders$/",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 6,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "Orders",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Runs",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 3,
+          "x": 6,
+          "y": 8
+        },
+        "id": 33,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 5,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ],
+              [
+                8320,
+                1612933579000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Produced",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 15
+                }
+              ]
+            },
+            "unit": "dthms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 3,
+          "x": 9,
+          "y": 8
+        },
+        "id": 34,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 29,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "Unrecorded Downtime",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ],
+              [
+                8320,
+                1612933579000
+              ],
+              [
+                82,
+                1612933992000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Unrecorded Downtime",
+        "type": "stat"
+      },
+      {
+        "aliasColors": {},
+        "bars": true,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "TestData DB",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 8
+        },
+        "hiddenSeries": false,
+        "id": 35,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": false,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.4.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 2,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:256",
+            "alias": "Productive Time",
+            "color": "rgba(86, 166, 75, 0.8)"
+          },
+          {
+            "$$hashKey": "object:264",
+            "alias": "Planned Downtime",
+            "color": "rgba(220, 220, 220, 0.5)"
+          },
+          {
+            "$$hashKey": "object:428",
+            "alias": "Unplanned Downtime",
+            "color": "rgba(196, 22, 42, 0.45)"
+          },
+          {
+            "$$hashKey": "object:436",
+            "alias": "Rate Loss",
+            "color": "rgba(255, 152, 48, 0.5)"
+          },
+          {
+            "$$hashKey": "object:444",
+            "alias": "Quality Loss",
+            "color": "rgba(184, 119, 217, 0.5)"
+          },
+          {
+            "$$hashKey": "object:108",
+            "alias": "Unrecorded",
+            "color": "rgba(87, 148, 242, 0.5)"
+          }
+        ],
+        "spaceLength": 10,
+        "stack": true,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "Productive Time",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                23,
+                1610409600000
+              ],
+              [
+                19,
+                1610496000000
+              ],
+              [
+                35,
+                1610582400000
+              ],
+              [
+                23,
+                1610668800000
+              ],
+              [
+                27,
+                1610755200000
+              ],
+              [
+                25,
+                1611014400000
+              ],
+              [
+                45,
+                1611100800000
+              ],
+              [
+                39,
+                1611187200000
+              ],
+              [
+                15,
+                1611273600000
+              ],
+              [
+                16,
+                1611360000000
+              ],
+              [
+                26,
+                1611619200000
+              ],
+              [
+                25,
+                1611705600000
+              ],
+              [
+                23,
+                1611792000000
+              ],
+              [
+                34,
+                1611878400000
+              ],
+              [
+                39,
+                1611964800000
+              ],
+              [
+                27,
+                1612224000000
+              ],
+              [
+                19,
+                1612310400000
+              ],
+              [
+                30,
+                1612396800000
+              ],
+              [
+                39,
+                1612483200000
+              ],
+              [
+                21,
+                1612569600000
+              ],
+              [
+                26,
+                1612828800000
+              ],
+              [
+                33,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Quality Loss",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                2,
+                1610409600000
+              ],
+              [
+                2,
+                1610496000000
+              ],
+              [
+                1,
+                1610582400000
+              ],
+              [
+                0,
+                1610668800000
+              ],
+              [
+                1,
+                1610755200000
+              ],
+              [
+                2,
+                1611014400000
+              ],
+              [
+                0,
+                1611100800000
+              ],
+              [
+                3,
+                1611187200000
+              ],
+              [
+                0,
+                1611273600000
+              ],
+              [
+                3,
+                1611360000000
+              ],
+              [
+                2,
+                1611619200000
+              ],
+              [
+                2,
+                1611705600000
+              ],
+              [
+                2,
+                1611792000000
+              ],
+              [
+                1,
+                1611878400000
+              ],
+              [
+                1,
+                1611964800000
+              ],
+              [
+                2,
+                1612224000000
+              ],
+              [
+                9,
+                1612310400000
+              ],
+              [
+                1,
+                1612396800000
+              ],
+              [
+                1,
+                1612483200000
+              ],
+              [
+                1,
+                1612569600000
+              ],
+              [
+                1,
+                1612828800000
+              ],
+              [
+                1,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "B",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Unrecorded",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                25,
+                1610409600000
+              ],
+              [
+                40,
+                1610496000000
+              ],
+              [
+                36,
+                1610582400000
+              ],
+              [
+                27,
+                1610668800000
+              ],
+              [
+                30,
+                1610755200000
+              ],
+              [
+                24,
+                1611014400000
+              ],
+              [
+                35,
+                1611100800000
+              ],
+              [
+                32,
+                1611187200000
+              ],
+              [
+                34,
+                1611273600000
+              ],
+              [
+                38,
+                1611360000000
+              ],
+              [
+                27,
+                1611619200000
+              ],
+              [
+                22,
+                1611705600000
+              ],
+              [
+                35,
+                1611792000000
+              ],
+              [
+                35,
+                1611878400000
+              ],
+              [
+                33,
+                1611964800000
+              ],
+              [
+                32,
+                1612224000000
+              ],
+              [
+                23,
+                1612310400000
+              ],
+              [
+                35,
+                1612396800000
+              ],
+              [
+                30,
+                1612483200000
+              ],
+              [
+                22,
+                1612569600000
+              ],
+              [
+                40,
+                1612828800000
+              ],
+              [
+                32,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "C",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Unplanned Downtime",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                50,
+                1610409600000
+              ],
+              [
+                38,
+                1610496000000
+              ],
+              [
+                23,
+                1610582400000
+              ],
+              [
+                49,
+                1610668800000
+              ],
+              [
+                42,
+                1610755200000
+              ],
+              [
+                42,
+                1611014400000
+              ],
+              [
+                12,
+                1611100800000
+              ],
+              [
+                20,
+                1611187200000
+              ],
+              [
+                47,
+                1611273600000
+              ],
+              [
+                42,
+                1611360000000
+              ],
+              [
+                37,
+                1611619200000
+              ],
+              [
+                42,
+                1611705600000
+              ],
+              [
+                32,
+                1611792000000
+              ],
+              [
+                21,
+                1611878400000
+              ],
+              [
+                24,
+                1611964800000
+              ],
+              [
+                31,
+                1612224000000
+              ],
+              [
+                48,
+                1612310400000
+              ],
+              [
+                26,
+                1612396800000
+              ],
+              [
+                24,
+                1612483200000
+              ],
+              [
+                54,
+                1612569600000
+              ],
+              [
+                28,
+                1612828800000
+              ],
+              [
+                31,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "D",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Planned Downtime",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                0,
+                1610409600000
+              ],
+              [
+                1,
+                1610496000000
+              ],
+              [
+                5,
+                1610582400000
+              ],
+              [
+                1,
+                1610668800000
+              ],
+              [
+                0,
+                1610755200000
+              ],
+              [
+                7,
+                1611014400000
+              ],
+              [
+                8,
+                1611100800000
+              ],
+              [
+                6,
+                1611187200000
+              ],
+              [
+                4,
+                1611273600000
+              ],
+              [
+                1,
+                1611360000000
+              ],
+              [
+                8,
+                1611619200000
+              ],
+              [
+                9,
+                1611705600000
+              ],
+              [
+                8,
+                1611792000000
+              ],
+              [
+                9,
+                1611878400000
+              ],
+              [
+                3,
+                1611964800000
+              ],
+              [
+                8,
+                1612224000000
+              ],
+              [
+                1,
+                1612310400000
+              ],
+              [
+                8,
+                1612396800000
+              ],
+              [
+                6,
+                1612483200000
+              ],
+              [
+                2,
+                1612569600000
+              ],
+              [
+                5,
+                1612828800000
+              ],
+              [
+                3,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "E",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "thresholds": [
+          {
+            "$$hashKey": "object:662",
+            "colorMode": "custom",
+            "fill": true,
+            "fillColor": "rgba(242, 73, 92, 0.2)",
+            "line": true,
+            "lineColor": "rgba(255, 0, 46, 0.5)",
+            "op": "lt",
+            "value": 40,
+            "yaxis": "right"
+          }
+        ],
+        "timeFrom": "30d",
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "$LINE Production Losses",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:20",
+            "decimals": null,
+            "format": "percent",
+            "label": null,
+            "logBase": 1,
+            "max": "100",
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:21",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 14
+        },
+        "id": 36,
+        "panels": [],
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 8,
+        "scopedVars": {
+          "LINE": null
+        },
+        "title": "$LINE",
+        "type": "row"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 4,
+          "x": 0,
+          "y": 15
+        },
+        "id": 37,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 4,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "OEE",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "The total count of different jobs executed on in the display time period.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 2,
+          "x": 4,
+          "y": 15
+        },
+        "id": 38,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/^Orders$/",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 6,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "Orders",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Runs",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 3,
+          "x": 6,
+          "y": 15
+        },
+        "id": 39,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 5,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ],
+              [
+                8320,
+                1612933579000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Produced",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 15
+                }
+              ]
+            },
+            "unit": "dthms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 3,
+          "x": 9,
+          "y": 15
+        },
+        "id": 40,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 29,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "Unrecorded Downtime",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ],
+              [
+                8320,
+                1612933579000
+              ],
+              [
+                82,
+                1612933992000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Unrecorded Downtime",
+        "type": "stat"
+      },
+      {
+        "aliasColors": {},
+        "bars": true,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "TestData DB",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 15
+        },
+        "hiddenSeries": false,
+        "id": 41,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": false,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.4.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 2,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:256",
+            "alias": "Productive Time",
+            "color": "rgba(86, 166, 75, 0.8)"
+          },
+          {
+            "$$hashKey": "object:264",
+            "alias": "Planned Downtime",
+            "color": "rgba(220, 220, 220, 0.5)"
+          },
+          {
+            "$$hashKey": "object:428",
+            "alias": "Unplanned Downtime",
+            "color": "rgba(196, 22, 42, 0.45)"
+          },
+          {
+            "$$hashKey": "object:436",
+            "alias": "Rate Loss",
+            "color": "rgba(255, 152, 48, 0.5)"
+          },
+          {
+            "$$hashKey": "object:444",
+            "alias": "Quality Loss",
+            "color": "rgba(184, 119, 217, 0.5)"
+          },
+          {
+            "$$hashKey": "object:108",
+            "alias": "Unrecorded",
+            "color": "rgba(87, 148, 242, 0.5)"
+          }
+        ],
+        "spaceLength": 10,
+        "stack": true,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "Productive Time",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                23,
+                1610409600000
+              ],
+              [
+                19,
+                1610496000000
+              ],
+              [
+                35,
+                1610582400000
+              ],
+              [
+                23,
+                1610668800000
+              ],
+              [
+                27,
+                1610755200000
+              ],
+              [
+                25,
+                1611014400000
+              ],
+              [
+                45,
+                1611100800000
+              ],
+              [
+                39,
+                1611187200000
+              ],
+              [
+                15,
+                1611273600000
+              ],
+              [
+                16,
+                1611360000000
+              ],
+              [
+                26,
+                1611619200000
+              ],
+              [
+                25,
+                1611705600000
+              ],
+              [
+                23,
+                1611792000000
+              ],
+              [
+                34,
+                1611878400000
+              ],
+              [
+                39,
+                1611964800000
+              ],
+              [
+                27,
+                1612224000000
+              ],
+              [
+                19,
+                1612310400000
+              ],
+              [
+                30,
+                1612396800000
+              ],
+              [
+                39,
+                1612483200000
+              ],
+              [
+                21,
+                1612569600000
+              ],
+              [
+                26,
+                1612828800000
+              ],
+              [
+                33,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Quality Loss",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                2,
+                1610409600000
+              ],
+              [
+                2,
+                1610496000000
+              ],
+              [
+                1,
+                1610582400000
+              ],
+              [
+                0,
+                1610668800000
+              ],
+              [
+                1,
+                1610755200000
+              ],
+              [
+                2,
+                1611014400000
+              ],
+              [
+                0,
+                1611100800000
+              ],
+              [
+                3,
+                1611187200000
+              ],
+              [
+                0,
+                1611273600000
+              ],
+              [
+                3,
+                1611360000000
+              ],
+              [
+                2,
+                1611619200000
+              ],
+              [
+                2,
+                1611705600000
+              ],
+              [
+                2,
+                1611792000000
+              ],
+              [
+                1,
+                1611878400000
+              ],
+              [
+                1,
+                1611964800000
+              ],
+              [
+                2,
+                1612224000000
+              ],
+              [
+                9,
+                1612310400000
+              ],
+              [
+                1,
+                1612396800000
+              ],
+              [
+                1,
+                1612483200000
+              ],
+              [
+                1,
+                1612569600000
+              ],
+              [
+                1,
+                1612828800000
+              ],
+              [
+                1,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "B",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Unrecorded",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                25,
+                1610409600000
+              ],
+              [
+                40,
+                1610496000000
+              ],
+              [
+                36,
+                1610582400000
+              ],
+              [
+                27,
+                1610668800000
+              ],
+              [
+                30,
+                1610755200000
+              ],
+              [
+                24,
+                1611014400000
+              ],
+              [
+                35,
+                1611100800000
+              ],
+              [
+                32,
+                1611187200000
+              ],
+              [
+                34,
+                1611273600000
+              ],
+              [
+                38,
+                1611360000000
+              ],
+              [
+                27,
+                1611619200000
+              ],
+              [
+                22,
+                1611705600000
+              ],
+              [
+                35,
+                1611792000000
+              ],
+              [
+                35,
+                1611878400000
+              ],
+              [
+                33,
+                1611964800000
+              ],
+              [
+                32,
+                1612224000000
+              ],
+              [
+                23,
+                1612310400000
+              ],
+              [
+                35,
+                1612396800000
+              ],
+              [
+                30,
+                1612483200000
+              ],
+              [
+                22,
+                1612569600000
+              ],
+              [
+                40,
+                1612828800000
+              ],
+              [
+                32,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "C",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Unplanned Downtime",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                50,
+                1610409600000
+              ],
+              [
+                38,
+                1610496000000
+              ],
+              [
+                23,
+                1610582400000
+              ],
+              [
+                49,
+                1610668800000
+              ],
+              [
+                42,
+                1610755200000
+              ],
+              [
+                42,
+                1611014400000
+              ],
+              [
+                12,
+                1611100800000
+              ],
+              [
+                20,
+                1611187200000
+              ],
+              [
+                47,
+                1611273600000
+              ],
+              [
+                42,
+                1611360000000
+              ],
+              [
+                37,
+                1611619200000
+              ],
+              [
+                42,
+                1611705600000
+              ],
+              [
+                32,
+                1611792000000
+              ],
+              [
+                21,
+                1611878400000
+              ],
+              [
+                24,
+                1611964800000
+              ],
+              [
+                31,
+                1612224000000
+              ],
+              [
+                48,
+                1612310400000
+              ],
+              [
+                26,
+                1612396800000
+              ],
+              [
+                24,
+                1612483200000
+              ],
+              [
+                54,
+                1612569600000
+              ],
+              [
+                28,
+                1612828800000
+              ],
+              [
+                31,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "D",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Planned Downtime",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                0,
+                1610409600000
+              ],
+              [
+                1,
+                1610496000000
+              ],
+              [
+                5,
+                1610582400000
+              ],
+              [
+                1,
+                1610668800000
+              ],
+              [
+                0,
+                1610755200000
+              ],
+              [
+                7,
+                1611014400000
+              ],
+              [
+                8,
+                1611100800000
+              ],
+              [
+                6,
+                1611187200000
+              ],
+              [
+                4,
+                1611273600000
+              ],
+              [
+                1,
+                1611360000000
+              ],
+              [
+                8,
+                1611619200000
+              ],
+              [
+                9,
+                1611705600000
+              ],
+              [
+                8,
+                1611792000000
+              ],
+              [
+                9,
+                1611878400000
+              ],
+              [
+                3,
+                1611964800000
+              ],
+              [
+                8,
+                1612224000000
+              ],
+              [
+                1,
+                1612310400000
+              ],
+              [
+                8,
+                1612396800000
+              ],
+              [
+                6,
+                1612483200000
+              ],
+              [
+                2,
+                1612569600000
+              ],
+              [
+                5,
+                1612828800000
+              ],
+              [
+                3,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "E",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "thresholds": [
+          {
+            "$$hashKey": "object:662",
+            "colorMode": "custom",
+            "fill": true,
+            "fillColor": "rgba(242, 73, 92, 0.2)",
+            "line": true,
+            "lineColor": "rgba(255, 0, 46, 0.5)",
+            "op": "lt",
+            "value": 40,
+            "yaxis": "right"
+          }
+        ],
+        "timeFrom": "30d",
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "$LINE Production Losses",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:20",
+            "decimals": null,
+            "format": "percent",
+            "label": null,
+            "logBase": 1,
+            "max": "100",
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:21",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 21
+        },
+        "id": 42,
+        "panels": [],
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 8,
+        "scopedVars": {
+          "LINE": null
+        },
+        "title": "$LINE",
+        "type": "row"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 4,
+          "x": 0,
+          "y": 22
+        },
+        "id": 43,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 4,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "OEE",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "The total count of different jobs executed on in the display time period.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 2,
+          "x": 4,
+          "y": 22
+        },
+        "id": 44,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/^Orders$/",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 6,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "Orders",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Runs",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 3,
+          "x": 6,
+          "y": 22
+        },
+        "id": 45,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 5,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ],
+              [
+                8320,
+                1612933579000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Produced",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 15
+                }
+              ]
+            },
+            "unit": "dthms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 3,
+          "x": 9,
+          "y": 22
+        },
+        "id": 46,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 29,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "Unrecorded Downtime",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ],
+              [
+                8320,
+                1612933579000
+              ],
+              [
+                82,
+                1612933992000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Unrecorded Downtime",
+        "type": "stat"
+      },
+      {
+        "aliasColors": {},
+        "bars": true,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "TestData DB",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 22
+        },
+        "hiddenSeries": false,
+        "id": 47,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": false,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.4.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 2,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:256",
+            "alias": "Productive Time",
+            "color": "rgba(86, 166, 75, 0.8)"
+          },
+          {
+            "$$hashKey": "object:264",
+            "alias": "Planned Downtime",
+            "color": "rgba(220, 220, 220, 0.5)"
+          },
+          {
+            "$$hashKey": "object:428",
+            "alias": "Unplanned Downtime",
+            "color": "rgba(196, 22, 42, 0.45)"
+          },
+          {
+            "$$hashKey": "object:436",
+            "alias": "Rate Loss",
+            "color": "rgba(255, 152, 48, 0.5)"
+          },
+          {
+            "$$hashKey": "object:444",
+            "alias": "Quality Loss",
+            "color": "rgba(184, 119, 217, 0.5)"
+          },
+          {
+            "$$hashKey": "object:108",
+            "alias": "Unrecorded",
+            "color": "rgba(87, 148, 242, 0.5)"
+          }
+        ],
+        "spaceLength": 10,
+        "stack": true,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "Productive Time",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                23,
+                1610409600000
+              ],
+              [
+                19,
+                1610496000000
+              ],
+              [
+                35,
+                1610582400000
+              ],
+              [
+                23,
+                1610668800000
+              ],
+              [
+                27,
+                1610755200000
+              ],
+              [
+                25,
+                1611014400000
+              ],
+              [
+                45,
+                1611100800000
+              ],
+              [
+                39,
+                1611187200000
+              ],
+              [
+                15,
+                1611273600000
+              ],
+              [
+                16,
+                1611360000000
+              ],
+              [
+                26,
+                1611619200000
+              ],
+              [
+                25,
+                1611705600000
+              ],
+              [
+                23,
+                1611792000000
+              ],
+              [
+                34,
+                1611878400000
+              ],
+              [
+                39,
+                1611964800000
+              ],
+              [
+                27,
+                1612224000000
+              ],
+              [
+                19,
+                1612310400000
+              ],
+              [
+                30,
+                1612396800000
+              ],
+              [
+                39,
+                1612483200000
+              ],
+              [
+                21,
+                1612569600000
+              ],
+              [
+                26,
+                1612828800000
+              ],
+              [
+                33,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Quality Loss",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                2,
+                1610409600000
+              ],
+              [
+                2,
+                1610496000000
+              ],
+              [
+                1,
+                1610582400000
+              ],
+              [
+                0,
+                1610668800000
+              ],
+              [
+                1,
+                1610755200000
+              ],
+              [
+                2,
+                1611014400000
+              ],
+              [
+                0,
+                1611100800000
+              ],
+              [
+                3,
+                1611187200000
+              ],
+              [
+                0,
+                1611273600000
+              ],
+              [
+                3,
+                1611360000000
+              ],
+              [
+                2,
+                1611619200000
+              ],
+              [
+                2,
+                1611705600000
+              ],
+              [
+                2,
+                1611792000000
+              ],
+              [
+                1,
+                1611878400000
+              ],
+              [
+                1,
+                1611964800000
+              ],
+              [
+                2,
+                1612224000000
+              ],
+              [
+                9,
+                1612310400000
+              ],
+              [
+                1,
+                1612396800000
+              ],
+              [
+                1,
+                1612483200000
+              ],
+              [
+                1,
+                1612569600000
+              ],
+              [
+                1,
+                1612828800000
+              ],
+              [
+                1,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "B",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Unrecorded",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                25,
+                1610409600000
+              ],
+              [
+                40,
+                1610496000000
+              ],
+              [
+                36,
+                1610582400000
+              ],
+              [
+                27,
+                1610668800000
+              ],
+              [
+                30,
+                1610755200000
+              ],
+              [
+                24,
+                1611014400000
+              ],
+              [
+                35,
+                1611100800000
+              ],
+              [
+                32,
+                1611187200000
+              ],
+              [
+                34,
+                1611273600000
+              ],
+              [
+                38,
+                1611360000000
+              ],
+              [
+                27,
+                1611619200000
+              ],
+              [
+                22,
+                1611705600000
+              ],
+              [
+                35,
+                1611792000000
+              ],
+              [
+                35,
+                1611878400000
+              ],
+              [
+                33,
+                1611964800000
+              ],
+              [
+                32,
+                1612224000000
+              ],
+              [
+                23,
+                1612310400000
+              ],
+              [
+                35,
+                1612396800000
+              ],
+              [
+                30,
+                1612483200000
+              ],
+              [
+                22,
+                1612569600000
+              ],
+              [
+                40,
+                1612828800000
+              ],
+              [
+                32,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "C",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Unplanned Downtime",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                50,
+                1610409600000
+              ],
+              [
+                38,
+                1610496000000
+              ],
+              [
+                23,
+                1610582400000
+              ],
+              [
+                49,
+                1610668800000
+              ],
+              [
+                42,
+                1610755200000
+              ],
+              [
+                42,
+                1611014400000
+              ],
+              [
+                12,
+                1611100800000
+              ],
+              [
+                20,
+                1611187200000
+              ],
+              [
+                47,
+                1611273600000
+              ],
+              [
+                42,
+                1611360000000
+              ],
+              [
+                37,
+                1611619200000
+              ],
+              [
+                42,
+                1611705600000
+              ],
+              [
+                32,
+                1611792000000
+              ],
+              [
+                21,
+                1611878400000
+              ],
+              [
+                24,
+                1611964800000
+              ],
+              [
+                31,
+                1612224000000
+              ],
+              [
+                48,
+                1612310400000
+              ],
+              [
+                26,
+                1612396800000
+              ],
+              [
+                24,
+                1612483200000
+              ],
+              [
+                54,
+                1612569600000
+              ],
+              [
+                28,
+                1612828800000
+              ],
+              [
+                31,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "D",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Planned Downtime",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                0,
+                1610409600000
+              ],
+              [
+                1,
+                1610496000000
+              ],
+              [
+                5,
+                1610582400000
+              ],
+              [
+                1,
+                1610668800000
+              ],
+              [
+                0,
+                1610755200000
+              ],
+              [
+                7,
+                1611014400000
+              ],
+              [
+                8,
+                1611100800000
+              ],
+              [
+                6,
+                1611187200000
+              ],
+              [
+                4,
+                1611273600000
+              ],
+              [
+                1,
+                1611360000000
+              ],
+              [
+                8,
+                1611619200000
+              ],
+              [
+                9,
+                1611705600000
+              ],
+              [
+                8,
+                1611792000000
+              ],
+              [
+                9,
+                1611878400000
+              ],
+              [
+                3,
+                1611964800000
+              ],
+              [
+                8,
+                1612224000000
+              ],
+              [
+                1,
+                1612310400000
+              ],
+              [
+                8,
+                1612396800000
+              ],
+              [
+                6,
+                1612483200000
+              ],
+              [
+                2,
+                1612569600000
+              ],
+              [
+                5,
+                1612828800000
+              ],
+              [
+                3,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "E",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "thresholds": [
+          {
+            "$$hashKey": "object:662",
+            "colorMode": "custom",
+            "fill": true,
+            "fillColor": "rgba(242, 73, 92, 0.2)",
+            "line": true,
+            "lineColor": "rgba(255, 0, 46, 0.5)",
+            "op": "lt",
+            "value": 40,
+            "yaxis": "right"
+          }
+        ],
+        "timeFrom": "30d",
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "$LINE Production Losses",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:20",
+            "decimals": null,
+            "format": "percent",
+            "label": null,
+            "logBase": 1,
+            "max": "100",
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:21",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      },
+      {
+        "collapsed": false,
+        "datasource": null,
+        "gridPos": {
+          "h": 1,
+          "w": 24,
+          "x": 0,
+          "y": 28
+        },
+        "id": 48,
+        "panels": [],
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 8,
+        "scopedVars": {
+          "LINE": null
+        },
+        "title": "$LINE",
+        "type": "row"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "light-green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            },
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 4,
+          "x": 0,
+          "y": 29
+        },
+        "id": 49,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 4,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "OEE",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "The total count of different jobs executed on in the display time period.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                }
+              ]
+            },
+            "unit": "none"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 2,
+          "x": 4,
+          "y": 29
+        },
+        "id": 50,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "center",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "/^Orders$/",
+            "values": false
+          },
+          "text": {},
+          "textMode": "value"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 6,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "Orders",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Runs",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 3,
+          "x": 6,
+          "y": 29
+        },
+        "id": 51,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 5,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ],
+              [
+                8320,
+                1612933579000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Produced",
+        "type": "stat"
+      },
+      {
+        "datasource": "TestData DB",
+        "description": "Overall Equipment Effectiveness index represents the availability of a work unit, the effectiveness of the work unit, and the quality ratio KPIs integrated in a single indicator.",
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "custom": {},
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "#aaaaaa",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 15
+                }
+              ]
+            },
+            "unit": "dthms"
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 6,
+          "w": 3,
+          "x": 9,
+          "y": 29
+        },
+        "id": 52,
+        "options": {
+          "colorMode": "value",
+          "graphMode": "none",
+          "justifyMode": "auto",
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "text": {},
+          "textMode": "auto"
+        },
+        "pluginVersion": "7.4.1",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 29,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "targets": [
+          {
+            "alias": "Unrecorded Downtime",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                1,
+                1612933332000
+              ],
+              [
+                2,
+                1612933332000
+              ],
+              [
+                3,
+                1612933332000
+              ],
+              [
+                35,
+                1612933333000
+              ],
+              [
+                8320,
+                1612933579000
+              ],
+              [
+                82,
+                1612933992000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "title": "Unrecorded Downtime",
+        "type": "stat"
+      },
+      {
+        "aliasColors": {},
+        "bars": true,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "TestData DB",
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {},
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "fill": 1,
+        "fillGradient": 0,
+        "gridPos": {
+          "h": 6,
+          "w": 12,
+          "x": 12,
+          "y": 29
+        },
+        "hiddenSeries": false,
+        "id": 53,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": false,
+        "linewidth": 1,
+        "nullPointMode": "null",
+        "options": {
+          "alertThreshold": true
+        },
+        "percentage": false,
+        "pluginVersion": "7.4.1",
+        "pointradius": 2,
+        "points": false,
+        "renderer": "flot",
+        "repeatIteration": 1614647935092,
+        "repeatPanelId": 2,
+        "repeatedByRow": true,
+        "scopedVars": {
+          "LINE": null
+        },
+        "seriesOverrides": [
+          {
+            "$$hashKey": "object:256",
+            "alias": "Productive Time",
+            "color": "rgba(86, 166, 75, 0.8)"
+          },
+          {
+            "$$hashKey": "object:264",
+            "alias": "Planned Downtime",
+            "color": "rgba(220, 220, 220, 0.5)"
+          },
+          {
+            "$$hashKey": "object:428",
+            "alias": "Unplanned Downtime",
+            "color": "rgba(196, 22, 42, 0.45)"
+          },
+          {
+            "$$hashKey": "object:436",
+            "alias": "Rate Loss",
+            "color": "rgba(255, 152, 48, 0.5)"
+          },
+          {
+            "$$hashKey": "object:444",
+            "alias": "Quality Loss",
+            "color": "rgba(184, 119, 217, 0.5)"
+          },
+          {
+            "$$hashKey": "object:108",
+            "alias": "Unrecorded",
+            "color": "rgba(87, 148, 242, 0.5)"
+          }
+        ],
+        "spaceLength": 10,
+        "stack": true,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "Productive Time",
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "dataPath": "data",
+            "groupBy": "",
+            "lines": 10,
+            "points": [
+              [
+                23,
+                1610409600000
+              ],
+              [
+                19,
+                1610496000000
+              ],
+              [
+                35,
+                1610582400000
+              ],
+              [
+                23,
+                1610668800000
+              ],
+              [
+                27,
+                1610755200000
+              ],
+              [
+                25,
+                1611014400000
+              ],
+              [
+                45,
+                1611100800000
+              ],
+              [
+                39,
+                1611187200000
+              ],
+              [
+                15,
+                1611273600000
+              ],
+              [
+                16,
+                1611360000000
+              ],
+              [
+                26,
+                1611619200000
+              ],
+              [
+                25,
+                1611705600000
+              ],
+              [
+                23,
+                1611792000000
+              ],
+              [
+                34,
+                1611878400000
+              ],
+              [
+                39,
+                1611964800000
+              ],
+              [
+                27,
+                1612224000000
+              ],
+              [
+                19,
+                1612310400000
+              ],
+              [
+                30,
+                1612396800000
+              ],
+              [
+                39,
+                1612483200000
+              ],
+              [
+                21,
+                1612569600000
+              ],
+              [
+                26,
+                1612828800000
+              ],
+              [
+                33,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "queryText": "query {\n      data:submissions(user:\"$user\"){\n          Time:submitTime\n          idle running completed\n      }\n}",
+            "refId": "A",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Quality Loss",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                2,
+                1610409600000
+              ],
+              [
+                2,
+                1610496000000
+              ],
+              [
+                1,
+                1610582400000
+              ],
+              [
+                0,
+                1610668800000
+              ],
+              [
+                1,
+                1610755200000
+              ],
+              [
+                2,
+                1611014400000
+              ],
+              [
+                0,
+                1611100800000
+              ],
+              [
+                3,
+                1611187200000
+              ],
+              [
+                0,
+                1611273600000
+              ],
+              [
+                3,
+                1611360000000
+              ],
+              [
+                2,
+                1611619200000
+              ],
+              [
+                2,
+                1611705600000
+              ],
+              [
+                2,
+                1611792000000
+              ],
+              [
+                1,
+                1611878400000
+              ],
+              [
+                1,
+                1611964800000
+              ],
+              [
+                2,
+                1612224000000
+              ],
+              [
+                9,
+                1612310400000
+              ],
+              [
+                1,
+                1612396800000
+              ],
+              [
+                1,
+                1612483200000
+              ],
+              [
+                1,
+                1612569600000
+              ],
+              [
+                1,
+                1612828800000
+              ],
+              [
+                1,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "B",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Unrecorded",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                25,
+                1610409600000
+              ],
+              [
+                40,
+                1610496000000
+              ],
+              [
+                36,
+                1610582400000
+              ],
+              [
+                27,
+                1610668800000
+              ],
+              [
+                30,
+                1610755200000
+              ],
+              [
+                24,
+                1611014400000
+              ],
+              [
+                35,
+                1611100800000
+              ],
+              [
+                32,
+                1611187200000
+              ],
+              [
+                34,
+                1611273600000
+              ],
+              [
+                38,
+                1611360000000
+              ],
+              [
+                27,
+                1611619200000
+              ],
+              [
+                22,
+                1611705600000
+              ],
+              [
+                35,
+                1611792000000
+              ],
+              [
+                35,
+                1611878400000
+              ],
+              [
+                33,
+                1611964800000
+              ],
+              [
+                32,
+                1612224000000
+              ],
+              [
+                23,
+                1612310400000
+              ],
+              [
+                35,
+                1612396800000
+              ],
+              [
+                30,
+                1612483200000
+              ],
+              [
+                22,
+                1612569600000
+              ],
+              [
+                40,
+                1612828800000
+              ],
+              [
+                32,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "C",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Unplanned Downtime",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                50,
+                1610409600000
+              ],
+              [
+                38,
+                1610496000000
+              ],
+              [
+                23,
+                1610582400000
+              ],
+              [
+                49,
+                1610668800000
+              ],
+              [
+                42,
+                1610755200000
+              ],
+              [
+                42,
+                1611014400000
+              ],
+              [
+                12,
+                1611100800000
+              ],
+              [
+                20,
+                1611187200000
+              ],
+              [
+                47,
+                1611273600000
+              ],
+              [
+                42,
+                1611360000000
+              ],
+              [
+                37,
+                1611619200000
+              ],
+              [
+                42,
+                1611705600000
+              ],
+              [
+                32,
+                1611792000000
+              ],
+              [
+                21,
+                1611878400000
+              ],
+              [
+                24,
+                1611964800000
+              ],
+              [
+                31,
+                1612224000000
+              ],
+              [
+                48,
+                1612310400000
+              ],
+              [
+                26,
+                1612396800000
+              ],
+              [
+                24,
+                1612483200000
+              ],
+              [
+                54,
+                1612569600000
+              ],
+              [
+                28,
+                1612828800000
+              ],
+              [
+                31,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "D",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          },
+          {
+            "alias": "Planned Downtime",
+            "csvWave": {
+              "timeStep": 60,
+              "valuesCSV": "0,0,2,2,1,1"
+            },
+            "hide": false,
+            "lines": 10,
+            "points": [
+              [
+                0,
+                1610409600000
+              ],
+              [
+                1,
+                1610496000000
+              ],
+              [
+                5,
+                1610582400000
+              ],
+              [
+                1,
+                1610668800000
+              ],
+              [
+                0,
+                1610755200000
+              ],
+              [
+                7,
+                1611014400000
+              ],
+              [
+                8,
+                1611100800000
+              ],
+              [
+                6,
+                1611187200000
+              ],
+              [
+                4,
+                1611273600000
+              ],
+              [
+                1,
+                1611360000000
+              ],
+              [
+                8,
+                1611619200000
+              ],
+              [
+                9,
+                1611705600000
+              ],
+              [
+                8,
+                1611792000000
+              ],
+              [
+                9,
+                1611878400000
+              ],
+              [
+                3,
+                1611964800000
+              ],
+              [
+                8,
+                1612224000000
+              ],
+              [
+                1,
+                1612310400000
+              ],
+              [
+                8,
+                1612396800000
+              ],
+              [
+                6,
+                1612483200000
+              ],
+              [
+                2,
+                1612569600000
+              ],
+              [
+                5,
+                1612828800000
+              ],
+              [
+                3,
+                1612915200000
+              ]
+            ],
+            "pulseWave": {
+              "offCount": 3,
+              "offValue": 1,
+              "onCount": 3,
+              "onValue": 2,
+              "timeStep": 60
+            },
+            "refId": "E",
+            "scenarioId": "manual_entry",
+            "stream": {
+              "bands": 1,
+              "noise": 2.2,
+              "speed": 250,
+              "spread": 3.5,
+              "type": "signal"
+            },
+            "stringInput": ""
+          }
+        ],
+        "thresholds": [
+          {
+            "$$hashKey": "object:662",
+            "colorMode": "custom",
+            "fill": true,
+            "fillColor": "rgba(242, 73, 92, 0.2)",
+            "line": true,
+            "lineColor": "rgba(255, 0, 46, 0.5)",
+            "op": "lt",
+            "value": 40,
+            "yaxis": "right"
+          }
+        ],
+        "timeFrom": "30d",
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "$LINE Production Losses",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "$$hashKey": "object:20",
+            "decimals": null,
+            "format": "percent",
+            "label": null,
+            "logBase": 1,
+            "max": "100",
+            "min": "0",
+            "show": true
+          },
+          {
+            "$$hashKey": "object:21",
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
+      }
+    ],
+    "schemaVersion": 27,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "allValue": null,
+          "current": {
+            "selected": true,
+            "tags": [],
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
+          },
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": true,
+          "label": "Production Line",
+          "multi": true,
+          "name": "LINE",
+          "options": [
+            {
+              "selected": true,
+              "text": "All",
+              "value": "$__all"
+            }
+          ],
+          "query": "",
+          "queryValue": "",
+          "skipUrlSync": false,
+          "type": "custom"
+        }
+      ]
+    },
+    "time": {
+      "from": "now-6h",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Overview",
+    "uid": "libremfg-overview-v1",
+    "version": 1
+  }

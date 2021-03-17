@@ -1,0 +1,489 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "aliasBy": "",
+          "annotationTags": "$field_reasonCode",
+          "annotationText": "$field_reasonText",
+          "annotationTitle": "$field_reasonCode",
+          "constant": 6.5,
+          "dataPath": "getEquipment.events",
+          "datasource": "LibreMfg-ManufacturingGraph",
+          "enable": false,
+          "groupBy": "",
+          "hide": false,
+          "iconColor": "#FFEE52",
+          "limit": 100,
+          "name": "events",
+          "queryText": "query{\n  getEquipment(name:\"$line\"){\n    name\n    events{\n      equipment{name}\n      id\n      Time:startDateTime\n      TimeEnd:endDateTime\n      duration\n      reasonCode\n      reasonText\n      comments\n      }\n  }\n}",
+          "showIn": 0,
+          "tags": [],
+          "type": "tags"
+        },
+        {
+          "aliasBy": "",
+          "annotationTags": "",
+          "annotationText": "Requested Quantity $field_jobOrder.quantity",
+          "annotationTitle": "$field_jobOrder.operationsSegment.operationsDefinition.material.code - $field_jobOrder.operationsSegment.operationsDefinition.material.description",
+          "constant": 6.5,
+          "dataPath": "getEquipment.jobResponses",
+          "datasource": "LibreMfg-ManufacturingGraph",
+          "enable": true,
+          "groupBy": "",
+          "hide": false,
+          "iconColor": "#C0D8FF",
+          "limit": 100,
+          "name": "orders",
+          "queryText": "query{\n  getEquipment(name:\"$line\"){\n    name\n    jobResponses{\n      Time:startDateTime\n      TimeEnd:endDateTime\n      jobOrder{\n        quantity\n        operationsSegment{\n          operationsDefinition{\n            material{\n              code\n              description\n            }\n          }\n        }\n      }\n   }\n  }\n}",
+          "showIn": 0,
+          "tags": [],
+          "type": "tags"
+        },
+        {
+          "builtIn": 1,
+          "datasource": "-- Grafana --",
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": 3,
+    "iteration": 1616004231608,
+    "links": [],
+    "panels": [
+      {
+        "Aggregate": "sum",
+        "BarPadding": 10,
+        "BaseLineColor": "#ff0000",
+        "BaseLineValue": null,
+        "BaseLineWidth": 1,
+        "CurveType": "Monotone",
+        "DateFormat": "YYYY-MM-DD HH:mm:ss",
+        "DateTimeColName": "date",
+        "DotColor": "white",
+        "DotSize": 10,
+        "EvenRowColor": "rgba(61, 61, 64, 0.78)",
+        "FlashHighLimitBar": false,
+        "FlashLowLimitBar": false,
+        "GroupColName": "",
+        "GroupCols": 0,
+        "GroupGap": 5,
+        "GroupLabelColor": "#ffffff",
+        "GroupLabelFontSize": "200%",
+        "GroupNameFilter": "",
+        "GroupSortString": "",
+        "HighAxisColor": "#ffffff",
+        "HighAxisWidth": 1,
+        "HighBarColor": "rgb(120, 128, 0)",
+        "HighLimitBarColor": "#ff0000",
+        "HighLimitBarFlashColor": "#ffa500",
+        "HighLimitBarFlashTimeout": 1000,
+        "HighLimitLineColor": "#ff0000",
+        "HighLimitValue": null,
+        "HighLmitLineWidth": 1,
+        "HighSideMargin": 22,
+        "Horizontal": true,
+        "LabelColName": "reasonText",
+        "LabelColor": "#ffffff",
+        "LabelFontSize": "100%",
+        "LabelMargin": null,
+        "LabelNameFilter": "",
+        "LableAngle": 0,
+        "LineColor": "blue",
+        "LineWidth": 5,
+        "Links": [],
+        "LowAxisColor": "#ffffff",
+        "LowAxisWidth": 1,
+        "LowBarColor": "teal",
+        "LowLimitBarColor": "#ff0000",
+        "LowLimitBarFlashColor": "#ffa500",
+        "LowLimitBarFlashTimeout": 200,
+        "LowLimitLineColor": "#ff0000",
+        "LowLimitValue": null,
+        "LowLmitLineWidth": 1,
+        "LowSideMargin": 22,
+        "MaxLineColor": "rgb(74, 232, 12)",
+        "MaxLineValue": null,
+        "MaxLineWidth": 1,
+        "MinLineColor": "#ff0000",
+        "MinLineValue": null,
+        "MinLineWidth": 1,
+        "OddRowColor": "rgba(33, 33, 34, 0.92)",
+        "OutOfRangeLabelColor": "#ffffff",
+        "OutlineColor": "rgba(245, 255, 0, 0.1)",
+        "RecolorColName": null,
+        "RecolorHighLimitBar": false,
+        "RecolorLowLimitBar": false,
+        "RecolorRules": [],
+        "ScaleFactor": 1,
+        "ShowBars": true,
+        "ShowBaseLine": false,
+        "ShowDate": false,
+        "ShowGroupLabels": true,
+        "ShowHighLimitLine": false,
+        "ShowLabels": true,
+        "ShowLeftAxis": true,
+        "ShowLines": false,
+        "ShowLowLimitLine": false,
+        "ShowMaxLine": false,
+        "ShowMinLine": false,
+        "ShowRightAxis": true,
+        "ShowTooltips": true,
+        "ShowValues": true,
+        "SortColName": "duration (sum)",
+        "SortDirection": "descending",
+        "TZOffsetHours": 0,
+        "TooltipDateFormat": "YYYY-MM-DD HH:mm:ss",
+        "ValueColName": "min",
+        "ValueColor": "#ffffff",
+        "ValueDecimals": 0,
+        "ValueFontSize": "100%",
+        "ValuePosition": "top",
+        "datasource": "LibreMfg-ManufacturingGraph",
+        "fieldConfig": {
+          "defaults": {
+            "color": {},
+            "custom": {},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": []
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 15,
+          "w": 23,
+          "x": 0,
+          "y": 0
+        },
+        "id": 2,
+        "pluginVersion": "7.4.1",
+        "targets": [
+          {
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "dataPath": "getEquipment.events",
+            "groupBy": "",
+            "hide": true,
+            "queryText": "query{\n  getEquipment(id:\"$lineid\"){\n    events(filter:{endDateTime:{le:\"${__to:date:iso}\"},startDateTime:{ge:\"${__from:date:iso}\"}}){\n      equipment { name }\n      duration\n      reasonCode\n      reasonText\n      comments\n      reasonValue\n      reasonValueUoM { code }\n    }\n  }\n}",
+            "refId": "A"
+          }
+        ],
+        "timeFrom": null,
+        "timeShift": null,
+        "title": "Pareto by Reason",
+        "transformations": [
+          {
+            "id": "groupBy",
+            "options": {
+              "fields": {
+                "comments": {
+                  "aggregations": [
+                    "count"
+                  ],
+                  "operation": "aggregate"
+                },
+                "duration": {
+                  "aggregations": [
+                    "sum"
+                  ],
+                  "operation": "aggregate"
+                },
+                "equipment.name": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "reasonCode": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                },
+                "reasonText": {
+                  "aggregations": [],
+                  "operation": "groupby"
+                }
+              }
+            }
+          },
+          {
+            "id": "organize",
+            "options": {
+              "excludeByName": {
+                "equipment.name": true,
+                "reasonCode": true,
+                "reasonText": false
+              },
+              "indexByName": {},
+              "renameByName": {}
+            }
+          },
+          {
+            "id": "calculateField",
+            "options": {
+              "alias": "min",
+              "binary": {
+                "left": "duration (sum)",
+                "operator": "/",
+                "reducer": "sum",
+                "right": "60"
+              },
+              "mode": "binary",
+              "reduce": {
+                "reducer": "sum"
+              }
+            }
+          }
+        ],
+        "type": "michaeldmoore-multistat-panel"
+      }
+    ],
+    "refresh": false,
+    "schemaVersion": 27,
+    "style": "dark",
+    "tags": [],
+    "templating": {
+      "list": [
+        {
+          "allValue": null,
+          "current": null,
+          "datasource": "LibreMfg-ManufacturingGraph",
+          "definition": "query{\n  queryEquipment(filter:{not:{has:parent}}){\n    name\n  }\n} (queryEquipment)",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": "Site",
+          "multi": false,
+          "name": "site",
+          "options": [],
+          "query": {
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "dataPath": "queryEquipment",
+            "groupBy": "",
+            "queryText": "query{\n  queryEquipment(filter:{not:{has:parent}}){\n    name\n  }\n}"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "0xf",
+            "value": "0xf"
+          },
+          "datasource": null,
+          "definition": "query{\n  queryEquipment(filter: { name: { eq:\"$site\"}}){\n    id\n  }\n} (queryEquipment)",
+          "description": null,
+          "error": null,
+          "hide": 2,
+          "includeAll": false,
+          "label": "siteid",
+          "multi": false,
+          "name": "siteid",
+          "options": [
+            {
+              "selected": true,
+              "text": "0xf",
+              "value": "0xf"
+            }
+          ],
+          "query": {
+            "dataPath": "queryEquipment",
+            "queryText": "query{\n  queryEquipment(filter: { name: { eq:\"$site\"}}){\n    id\n  }\n}"
+          },
+          "refresh": 0,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": null,
+          "current": null,
+          "datasource": "LibreMfg-ManufacturingGraph",
+          "definition": "query{\n  getEquipment(name:\"$siteid\"){\n    children{\n      name\n    }\n  }\n} (getEquipment.children)",
+          "description": null,
+          "error": {
+            "locations": [
+              {
+                "column": 3,
+                "line": 2
+              }
+            ],
+            "message": "Unknown argument \"name\" on field \"getEquipment\" of type \"Query\"."
+          },
+          "hide": 0,
+          "includeAll": false,
+          "label": "Area",
+          "multi": false,
+          "name": "area",
+          "options": [],
+          "query": {
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "dataPath": "getEquipment.children",
+            "groupBy": "",
+            "queryText": "query{\n  getEquipment(name:\"$siteid\"){\n    children{\n      name\n    }\n  }\n}"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 1,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "0x1f",
+            "value": "0x1f"
+          },
+          "datasource": null,
+          "definition": "query{\n  queryEquipment(filter: { name: { eq:\"$area\"}}){\n    id\n  }\n} (queryEquipment)",
+          "description": null,
+          "error": null,
+          "hide": 2,
+          "includeAll": false,
+          "label": "areaid",
+          "multi": false,
+          "name": "areaid",
+          "options": [
+            {
+              "selected": true,
+              "text": "0x1f",
+              "value": "0x1f"
+            }
+          ],
+          "query": {
+            "dataPath": "queryEquipment",
+            "queryText": "query{\n  queryEquipment(filter: { name: { eq:\"$area\"}}){\n    id\n  }\n}"
+          },
+          "refresh": 0,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": null,
+          "current": null,
+          "datasource": "LibreMfg-ManufacturingGraph",
+          "definition": "query{\n  getEquipment(id:\"$areaid\"){\n    children{\n      name\n    }\n  }\n} (getEquipment.children)",
+          "description": null,
+          "error": null,
+          "hide": 0,
+          "includeAll": false,
+          "label": "Line",
+          "multi": false,
+          "name": "line",
+          "options": [],
+          "query": {
+            "aliasBy": "",
+            "annotationTags": "",
+            "annotationText": "",
+            "annotationTitle": "",
+            "constant": 6.5,
+            "dataPath": "getEquipment.children",
+            "groupBy": "",
+            "queryText": "query{\n  getEquipment(id:\"$areaid\"){\n    children{\n      name\n    }\n  }\n}"
+          },
+          "refresh": 1,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 5,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        },
+        {
+          "allValue": null,
+          "current": {
+            "selected": false,
+            "text": "0x20",
+            "value": "0x20"
+          },
+          "datasource": null,
+          "definition": "query{\n  queryEquipment(filter: { name: { eq:\"$line\"}}){\n    id\n  }\n} (queryEquipment)",
+          "description": null,
+          "error": null,
+          "hide": 2,
+          "includeAll": false,
+          "label": "lineid",
+          "multi": false,
+          "name": "lineid",
+          "options": [
+            {
+              "selected": true,
+              "text": "0x4d",
+              "value": "0x4d"
+            },
+            {
+              "selected": false,
+              "text": "0x9e02",
+              "value": "0x9e02"
+            }
+          ],
+          "query": {
+            "dataPath": "queryEquipment",
+            "queryText": "query{\n  queryEquipment(filter: { name: { eq:\"$line\"}}){\n    id\n  }\n}"
+          },
+          "refresh": 0,
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": 0,
+          "tagValuesQuery": "",
+          "tags": [],
+          "tagsQuery": "",
+          "type": "query",
+          "useTags": false
+        }
+      ]
+    },
+    "time": {
+      "from": "now/y",
+      "to": "now/y"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Pareto By Reason",
+    "uid": "libremfg-pareto-by-reason-v1",
+    "version": 1
+  }
