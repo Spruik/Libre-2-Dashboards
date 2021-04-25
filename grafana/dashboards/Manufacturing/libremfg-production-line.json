@@ -8,14 +8,14 @@
         "annotationTitle": "$field_reasonCode",
         "constant": 6.5,
         "dataPath": "getEquipment.events",
-        "datasource": "LibreMfg-ManufacturingGraph",
+        "datasource": "GraphQL Data Source",
         "enable": false,
         "groupBy": "",
         "hide": false,
         "iconColor": "#FFEE52",
         "limit": 100,
         "name": "events",
-        "queryText": "query{\n  getEquipment(id:\"$lineid\"){\n    name\n    events{\n      equipment{name}\n      id\n      Time:startDateTime\n      TimeEnd:endDateTime\n      duration\n      reasonCode\n      reasonText\n      comments\n      }\n  }\n}",
+        "queryText": "query{\n  getEquipment(id:\"$line\"){\n    name\n    events{\n      equipment{name}\n      id\n      Time:startDateTime\n      TimeEnd:endDateTime\n      duration\n      reasonCode\n      reasonText\n      comments\n      }\n  }\n}",
         "showIn": 0,
         "tags": [],
         "type": "tags"
@@ -27,14 +27,14 @@
         "annotationTitle": "$field_jobOrder.operationsSegment.operationsDefinition.material.code - $field_jobOrder.operationsSegment.operationsDefinition.material.description",
         "constant": 6.5,
         "dataPath": "getEquipment.jobResponses",
-        "datasource": "LibreMfg-ManufacturingGraph",
-        "enable": true,
+        "datasource": "GraphQL Data Source",
+        "enable": false,
         "groupBy": "",
         "hide": false,
         "iconColor": "#C0D8FF",
         "limit": 100,
         "name": "orders",
-        "queryText": "query{\n  getEquipment(id:\"$lineid\"){\n    name\n    jobResponses{\n      Time:startDateTime\n      TimeEnd:endDateTime\n      jobOrder{\n        quantity\n        operationsSegment{\n          operationsDefinition{\n            material{\n              code\n              description\n            }\n          }\n        }\n      }\n   }\n  }\n}",
+        "queryText": "query{\n  getEquipment(id:\"$line\"){\n    name\n    jobResponses{\n      Time:startDateTime\n      TimeEnd:endDateTime\n      jobOrder{\n        quantity\n        operationsSegment{\n          operationsDefinition{\n            material{\n              code\n              description\n            }\n          }\n        }\n      }\n   }\n  }\n}",
         "showIn": 0,
         "tags": [],
         "type": "tags"
@@ -54,7 +54,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
-  "iteration": 1616004063940,
+  "iteration": 1619310637885,
   "links": [],
   "panels": [
     {
@@ -65,7 +65,6 @@
           "color": {
             "mode": "thresholds"
           },
-          "custom": {},
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -153,6 +152,41 @@
                 "value": "dtdhms"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Recorded Work Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dthms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Recorded Working Time"
+            },
+            "properties": [
+              {
+                "id": "unit"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Recorded Work Time"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dtdhms"
+              }
+            ]
           }
         ]
       },
@@ -178,7 +212,7 @@
         "text": {},
         "textMode": "value_and_name"
       },
-      "pluginVersion": "7.4.1",
+      "pluginVersion": "7.5.3",
       "targets": [
         {
           "panelId": 2,
@@ -187,7 +221,6 @@
       ],
       "timeFrom": null,
       "timeShift": null,
-      "title": "",
       "transformations": [
         {
           "id": "organize",
@@ -278,9 +311,25 @@
         {
           "id": "calculateField",
           "options": {
-            "alias": "TotalDowntime",
+            "alias": "Actual Duration",
             "binary": {
               "left": "actualDuration",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "60"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "TotalDowntime",
+            "binary": {
+              "left": "Actual Duration",
               "operator": "-",
               "reducer": "sum",
               "right": "Runtime"
@@ -343,6 +392,12 @@
           "id": "groupBy",
           "options": {
             "fields": {
+              "Actual Duration": {
+                "aggregations": [
+                  "sum"
+                ],
+                "operation": "aggregate"
+              },
               "Qty Variance": {
                 "aggregations": [
                   "sum"
@@ -476,7 +531,7 @@
               "left": "Runtime",
               "operator": "/",
               "reducer": "sum",
-              "right": "actualDuration"
+              "right": "Actual Duration (sum)"
             },
             "mode": "binary",
             "reduce": {
@@ -517,13 +572,53 @@
               "unrecorded downtime": "Unrecorded Downtime"
             }
           }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Recorded Work Time",
+            "binary": {
+              "left": "Recorded Working Time",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "60"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Actual Duration (sum)": true,
+              "Recorded Downtime": false,
+              "Recorded Working Time": true
+            },
+            "indexByName": {
+              "Actual Duration (sum)": 10,
+              "OEE": 9,
+              "Produced Qty": 1,
+              "Qty Variance (sum)": 2,
+              "Recorded Downtime": 6,
+              "Recorded Work Time": 3,
+              "Recorded Working Time": 4,
+              "Requested Quantity": 0,
+              "Standard Working Time": 5,
+              "Unrecorded": 8,
+              "Unrecorded Downtime": 7
+            },
+            "renameByName": {}
+          }
         }
       ],
       "transparent": true,
       "type": "stat"
     },
     {
-      "datasource": "LibreMfg-ManufacturingGraph",
+      "datasource": "GraphQL Data Source",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -737,7 +832,7 @@
             "properties": [
               {
                 "id": "custom.width",
-                "value": 149
+                "value": 185
               }
             ]
           },
@@ -764,6 +859,46 @@
                 "value": "dtdhms"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "MTBF"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dthms"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Actual Duration"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dthms"
+              },
+              {
+                "id": "custom.width",
+                "value": 130
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Qty Variance"
+            },
+            "properties": [
+              {
+                "id": "custom.width",
+                "value": 100
+              }
+            ]
           }
         ]
       },
@@ -778,12 +913,12 @@
         "showHeader": true,
         "sortBy": [
           {
-            "desc": false,
-            "displayName": "Start"
+            "desc": true,
+            "displayName": "Actual Duration"
           }
         ]
       },
-      "pluginVersion": "7.4.1",
+      "pluginVersion": "7.5.3",
       "targets": [
         {
           "aliasBy": "",
@@ -792,10 +927,13 @@
           "annotationTitle": "",
           "constant": 6.5,
           "dataPath": "getEquipment.jobResponses",
+          "endTimePath": "endTime",
           "groupBy": "",
           "hide": true,
-          "queryText": "query{\n  getEquipment(id:\"$lineid\"){\n    id\n    name\n    jobResponses(filter:{endDateTime:{le:\"${__to:date:iso}\"},startDateTime:{ge:\"${__from:date:iso}\"}}){\n      equipment { name }\n      jobOrder{\n        name\n        scheduledStartDateTime\n        scheduledEndDateTime \n        scheduledDuration\n        quantity \n        operationsSegment{\n          duration\n          operationsDefinition{\n            material {\n              code\n              description\n            }\n          }\n        }\n      }\n      startDateTime\n      endDateTime\n      actualDuration \n      downtime:eventsAggregate{\n        count\n        durationSum\n      }\n      scrap:quantitiesAggregate(filter:{type:{eq:Scrap}}){\n        count\n        quantitySum\n      }\n      rework:quantitiesAggregate(filter:{type:{eq:Rework}}){\n        count\n        quantitySum\n      }\n      produced:quantitiesAggregate(filter:{type:{eq:Produced}}){\n        count\n        quantitySum\n      }\n    }\n  }\n}",
-          "refId": "A"
+          "queryText": "query{\n  getEquipment(id:\"$line\"){\n    id\n    name\n    jobResponses(filter:{endDateTime:{le:\"${__to:date:iso}\"},startDateTime:{ge:\"${__from:date:iso}\"}}){\n      equipment { name }\n      jobOrder{\n        name\n        scheduledStartDateTime\n        scheduledEndDateTime \n        scheduledDuration\n        quantity \n        operationsSegment{\n          duration\n          operationsDefinition{\n            material {\n              code\n              description\n            }\n          }\n        }\n      }\n      startDateTime\n      endDateTime\n      actualDuration \n      downtime:eventsAggregate{\n        count\n        durationSum\n      }\n      scrap:quantitiesAggregate(filter:{type:{eq:Scrap}}){\n        count\n        quantitySum\n      }\n      rework:quantitiesAggregate(filter:{type:{eq:Rework}}){\n        count\n        quantitySum\n      }\n      produced:quantitiesAggregate(filter:{type:{eq:Produced}}){\n        count\n        quantitySum\n      }\n    }\n  }\n}",
+          "refId": "A",
+          "timeFormat": null,
+          "timePath": "Time"
         }
       ],
       "timeFrom": null,
@@ -806,6 +944,8 @@
           "id": "organize",
           "options": {
             "excludeByName": {
+              "downtime.count": false,
+              "endDateTime": false,
               "equipment.name": true,
               "jobOrder.scheduledEndDateTime": true,
               "jobOrder.scheduledStartDateTime": true,
@@ -863,6 +1003,22 @@
         {
           "id": "calculateField",
           "options": {
+            "alias": "Actual Duration",
+            "binary": {
+              "left": "actualDuration",
+              "operator": "*",
+              "reducer": "sum",
+              "right": "60"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "calculateField",
+          "options": {
             "alias": "Runtime Mins",
             "binary": {
               "left": "Actual Qty",
@@ -893,42 +1049,11 @@
           }
         },
         {
-          "id": "organize",
-          "options": {
-            "excludeByName": {
-              "End": true,
-              "Order": true,
-              "Runtime Mins": true,
-              "Sch.Duration": true,
-              "downtime.count": true
-            },
-            "indexByName": {
-              "Actual Qty": 8,
-              "Downtime": 11,
-              "End": 4,
-              "Material Code": 0,
-              "Order": 2,
-              "Planned Qty": 7,
-              "Rework Qty": 9,
-              "Runtime Mins": 14,
-              "Runtime Seconds": 15,
-              "Sch.Duration": 5,
-              "Start": 3,
-              "Std Rate": 13,
-              "actualDuration": 6,
-              "description": 1,
-              "downtime.count": 12,
-              "scrap": 10
-            },
-            "renameByName": {}
-          }
-        },
-        {
           "id": "calculateField",
           "options": {
             "alias": "Total Downtime",
             "binary": {
-              "left": "actualDuration",
+              "left": "Actual Duration",
               "operator": "-",
               "reducer": "sum",
               "right": "Runtime Seconds"
@@ -954,6 +1079,60 @@
               "reducer": "sum"
             }
           }
+        },
+        {
+          "id": "calculateField",
+          "options": {
+            "alias": "Qty Variance",
+            "binary": {
+              "left": "Planned Qty",
+              "operator": "-",
+              "reducer": "sum",
+              "right": "Actual Qty"
+            },
+            "mode": "binary",
+            "reduce": {
+              "reducer": "sum"
+            }
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "End": true,
+              "Order": true,
+              "Runtime Mins": true,
+              "Sch.Duration": true,
+              "actualDuration": true,
+              "downtime.count": true
+            },
+            "indexByName": {
+              "Actual Duration": 6,
+              "Actual Qty": 9,
+              "Downtime": 12,
+              "End": 4,
+              "Material Code": 0,
+              "Order": 2,
+              "Planned Qty": 8,
+              "Qty Variance": 10,
+              "Rework Qty": 11,
+              "Runtime Mins": 15,
+              "Runtime Seconds": 16,
+              "Sch.Duration": 5,
+              "Scrap Qty": 17,
+              "Start": 3,
+              "Std Rate": 14,
+              "Total Downtime": 18,
+              "Unrecorded Downtime": 19,
+              "actualDuration": 7,
+              "description": 1,
+              "downtime.count": 13
+            },
+            "renameByName": {
+              "actualDuration": ""
+            }
+          }
         }
       ],
       "type": "table"
@@ -963,11 +1142,9 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "LibreMfg-ManufacturingGraph",
+      "datasource": "GraphQL Data Source",
       "fieldConfig": {
-        "defaults": {
-          "custom": {}
-        },
+        "defaults": {},
         "overrides": []
       },
       "fill": 1,
@@ -996,7 +1173,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.4.1",
+      "pluginVersion": "7.5.3",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -1012,11 +1189,12 @@
           "annotationTitle": "",
           "constant": 6.5,
           "dataPath": "getEquipment.events",
+          "endTimePath": "endTime",
           "groupBy": "",
           "orderByTime": "ASC",
           "policy": "default",
           "query": "// v.bucket, v.timeRangeStart, and v.timeRange stop are all variables supported by the flux plugin and influxdb\nfrom(bucket: v.bucket)\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_value\"] >= 10 and r[\"_value\"] <= 20)",
-          "queryText": "query{\n  getEquipment(id:\"$lineid\"){\n    events{\nTimestamp:startDateTime\nduration\n    }\n  }\n}",
+          "queryText": "query{\n  getEquipment(id:\"$line\"){\n    events{\nTimestamp:startDateTime\nduration\n    }\n  }\n}",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -1033,7 +1211,9 @@
               }
             ]
           ],
-          "tags": []
+          "tags": [],
+          "timeFormat": null,
+          "timePath": "Time"
         }
       ],
       "thresholds": [],
@@ -1076,6 +1256,614 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "datasource": "GraphQL Data Source",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Planned Start"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsUS"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 0,
+        "y": 20
+      },
+      "id": 12,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Actual Duration"
+          }
+        ]
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "aliasBy": "",
+          "annotationTags": "",
+          "annotationText": "",
+          "annotationTitle": "",
+          "constant": 6.5,
+          "dataPath": "getEquipment.jobResponses",
+          "endTimePath": "endTime",
+          "groupBy": "",
+          "hide": true,
+          "queryText": "query{\n  getEquipment(id:\"$line\"){\n    id\n    name\n    jobResponses(filter:{endDateTime:{le:\"${__to:date:iso}\"},startDateTime:{ge:\"${__from:date:iso}\"}}){\n      equipment { name }\n      jobOrder{\n        name\n        scheduledStartDateTime\n        scheduledEndDateTime \n        scheduledDuration\n        quantity \n        operationsSegment{\n          duration\n          operationsDefinition{\n            material {\n              code\n              description\n            }\n          }\n        }\n      }\n      startDateTime\n      endDateTime\n      actualDuration \n      downtime:eventsAggregate{\n        count\n        durationSum\n      }\n    }\n  }\n}",
+          "refId": "A",
+          "timeFormat": null,
+          "timePath": "Time"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Planned Start Time",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "actualDuration": true,
+              "downtime.count": true,
+              "downtime.durationSum": true,
+              "endDateTime": true,
+              "equipment.name": true,
+              "jobOrder.name": true,
+              "jobOrder.operationsSegment.duration": true,
+              "jobOrder.operationsSegment.operationsDefinition.material.code": true,
+              "jobOrder.operationsSegment.operationsDefinition.material.description": true,
+              "jobOrder.quantity": true,
+              "jobOrder.scheduledDuration": true,
+              "jobOrder.scheduledEndDateTime": true,
+              "jobOrder.scheduledStartDateTime": false,
+              "produced.count": true,
+              "rework.count": true,
+              "scrap.count": true,
+              "startDateTime": true
+            },
+            "indexByName": {
+              "actualDuration": 8,
+              "downtime.count": 13,
+              "downtime.durationSum": 12,
+              "endDateTime": 6,
+              "equipment.name": 16,
+              "jobOrder.name": 2,
+              "jobOrder.operationsSegment.duration": 17,
+              "jobOrder.operationsSegment.operationsDefinition.material.code": 0,
+              "jobOrder.operationsSegment.operationsDefinition.material.description": 1,
+              "jobOrder.quantity": 9,
+              "jobOrder.scheduledDuration": 7,
+              "jobOrder.scheduledEndDateTime": 4,
+              "jobOrder.scheduledStartDateTime": 3,
+              "produced.count": 15,
+              "produced.quantitySum": 10,
+              "rework.count": 14,
+              "rework.quantitySum": 11,
+              "scrap": 18,
+              "startDateTime": 5
+            },
+            "renameByName": {
+              "actualDuration": "",
+              "createdDateTime": "timestamp",
+              "downtime.count": "",
+              "downtime.durationSum": "Downtime",
+              "endDateTime": "End",
+              "equipment.name": "Equipment",
+              "jobOrder.name": "Order",
+              "jobOrder.operationsSegment.StdRate": "Std. Rate",
+              "jobOrder.operationsSegment.duration": "Std Rate",
+              "jobOrder.operationsSegment.operationsDefinition.material.code": "Material Code",
+              "jobOrder.operationsSegment.operationsDefinition.material.description": "description",
+              "jobOrder.quantity": "Planned Qty",
+              "jobOrder.scheduledDuration": "Sch.Duration",
+              "jobOrder.scheduledEndDateTime": "Sch.End",
+              "jobOrder.scheduledStartDateTime": "Planned Start",
+              "operator": "",
+              "produced.quantitySum": "Actual Qty",
+              "rework.quantitySum": "Rework Qty",
+              "scrap": "",
+              "scrap.count": "",
+              "scrap.quantitySum": "Scrap Qty",
+              "startDateTime": "Start"
+            }
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": true,
+            "mode": "reduceFields",
+            "reducers": [
+              "first"
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "GraphQL Data Source",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Actual Start"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsUS"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 6,
+        "y": 20
+      },
+      "id": 13,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Actual Duration"
+          }
+        ]
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "aliasBy": "",
+          "annotationTags": "",
+          "annotationText": "",
+          "annotationTitle": "",
+          "constant": 6.5,
+          "dataPath": "getEquipment.jobResponses",
+          "endTimePath": "endTime",
+          "groupBy": "",
+          "hide": true,
+          "queryText": "query{\n  getEquipment(id:\"$line\"){\n    id\n    name\n    jobResponses(filter:{endDateTime:{le:\"${__to:date:iso}\"},startDateTime:{ge:\"${__from:date:iso}\"}}){\n      equipment { name }\n      jobOrder{\n        name\n        scheduledStartDateTime\n        scheduledEndDateTime \n        scheduledDuration\n        quantity \n        operationsSegment{\n          duration\n          operationsDefinition{\n            material {\n              code\n              description\n            }\n          }\n        }\n      }\n      startDateTime\n      endDateTime\n      actualDuration \n      downtime:eventsAggregate{\n        count\n        durationSum\n      }\n    }\n  }\n}",
+          "refId": "A",
+          "timeFormat": null,
+          "timePath": "Time"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Actual Start Time",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "actualDuration": true,
+              "downtime.count": true,
+              "downtime.durationSum": true,
+              "endDateTime": true,
+              "equipment.name": true,
+              "jobOrder.name": true,
+              "jobOrder.operationsSegment.duration": true,
+              "jobOrder.operationsSegment.operationsDefinition.material.code": true,
+              "jobOrder.operationsSegment.operationsDefinition.material.description": true,
+              "jobOrder.quantity": true,
+              "jobOrder.scheduledDuration": true,
+              "jobOrder.scheduledEndDateTime": true,
+              "jobOrder.scheduledStartDateTime": true,
+              "produced.count": true,
+              "rework.count": true,
+              "scrap.count": true,
+              "startDateTime": false
+            },
+            "indexByName": {
+              "actualDuration": 8,
+              "downtime.count": 13,
+              "downtime.durationSum": 12,
+              "endDateTime": 6,
+              "equipment.name": 16,
+              "jobOrder.name": 2,
+              "jobOrder.operationsSegment.duration": 17,
+              "jobOrder.operationsSegment.operationsDefinition.material.code": 0,
+              "jobOrder.operationsSegment.operationsDefinition.material.description": 1,
+              "jobOrder.quantity": 9,
+              "jobOrder.scheduledDuration": 7,
+              "jobOrder.scheduledEndDateTime": 4,
+              "jobOrder.scheduledStartDateTime": 3,
+              "produced.count": 15,
+              "produced.quantitySum": 10,
+              "rework.count": 14,
+              "rework.quantitySum": 11,
+              "scrap": 18,
+              "startDateTime": 5
+            },
+            "renameByName": {
+              "actualDuration": "",
+              "createdDateTime": "timestamp",
+              "downtime.count": "",
+              "downtime.durationSum": "Downtime",
+              "endDateTime": "End",
+              "equipment.name": "Equipment",
+              "jobOrder.name": "Order",
+              "jobOrder.operationsSegment.StdRate": "Std. Rate",
+              "jobOrder.operationsSegment.duration": "Std Rate",
+              "jobOrder.operationsSegment.operationsDefinition.material.code": "Material Code",
+              "jobOrder.operationsSegment.operationsDefinition.material.description": "description",
+              "jobOrder.quantity": "Planned Qty",
+              "jobOrder.scheduledDuration": "Sch.Duration",
+              "jobOrder.scheduledEndDateTime": "Sch.End",
+              "jobOrder.scheduledStartDateTime": "Planned Start",
+              "operator": "",
+              "produced.quantitySum": "Actual Qty",
+              "rework.quantitySum": "Rework Qty",
+              "scrap": "",
+              "scrap.count": "",
+              "scrap.quantitySum": "Scrap Qty",
+              "startDateTime": "Actual Start"
+            }
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": true,
+            "mode": "reduceFields",
+            "reducers": [
+              "first"
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "GraphQL Data Source",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Planned End"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsUS"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 12,
+        "y": 20
+      },
+      "id": 14,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Actual Duration"
+          }
+        ]
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "aliasBy": "",
+          "annotationTags": "",
+          "annotationText": "",
+          "annotationTitle": "",
+          "constant": 6.5,
+          "dataPath": "getEquipment.jobResponses",
+          "endTimePath": "endTime",
+          "groupBy": "",
+          "hide": true,
+          "queryText": "query{\n  getEquipment(id:\"$line\"){\n    id\n    name\n    jobResponses(filter:{endDateTime:{le:\"${__to:date:iso}\"},startDateTime:{ge:\"${__from:date:iso}\"}}){\n      equipment { name }\n      jobOrder{\n        name\n        scheduledStartDateTime\n        scheduledEndDateTime \n        scheduledDuration\n        quantity \n        operationsSegment{\n          duration\n          operationsDefinition{\n            material {\n              code\n              description\n            }\n          }\n        }\n      }\n      startDateTime\n      endDateTime\n      actualDuration \n      downtime:eventsAggregate{\n        count\n        durationSum\n      }\n    }\n  }\n}",
+          "refId": "A",
+          "timeFormat": null,
+          "timePath": "Time"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Planned End Time",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "actualDuration": true,
+              "downtime.count": true,
+              "downtime.durationSum": true,
+              "endDateTime": true,
+              "equipment.name": true,
+              "jobOrder.name": true,
+              "jobOrder.operationsSegment.duration": true,
+              "jobOrder.operationsSegment.operationsDefinition.material.code": true,
+              "jobOrder.operationsSegment.operationsDefinition.material.description": true,
+              "jobOrder.quantity": true,
+              "jobOrder.scheduledDuration": true,
+              "jobOrder.scheduledEndDateTime": false,
+              "jobOrder.scheduledStartDateTime": true,
+              "produced.count": true,
+              "rework.count": true,
+              "scrap.count": true,
+              "startDateTime": true
+            },
+            "indexByName": {
+              "actualDuration": 8,
+              "downtime.count": 13,
+              "downtime.durationSum": 12,
+              "endDateTime": 6,
+              "equipment.name": 16,
+              "jobOrder.name": 2,
+              "jobOrder.operationsSegment.duration": 17,
+              "jobOrder.operationsSegment.operationsDefinition.material.code": 0,
+              "jobOrder.operationsSegment.operationsDefinition.material.description": 1,
+              "jobOrder.quantity": 9,
+              "jobOrder.scheduledDuration": 7,
+              "jobOrder.scheduledEndDateTime": 4,
+              "jobOrder.scheduledStartDateTime": 3,
+              "produced.count": 15,
+              "produced.quantitySum": 10,
+              "rework.count": 14,
+              "rework.quantitySum": 11,
+              "scrap": 18,
+              "startDateTime": 5
+            },
+            "renameByName": {
+              "actualDuration": "",
+              "createdDateTime": "timestamp",
+              "downtime.count": "",
+              "downtime.durationSum": "Downtime",
+              "endDateTime": "End",
+              "equipment.name": "Equipment",
+              "jobOrder.name": "Order",
+              "jobOrder.operationsSegment.StdRate": "Std. Rate",
+              "jobOrder.operationsSegment.duration": "Std Rate",
+              "jobOrder.operationsSegment.operationsDefinition.material.code": "Material Code",
+              "jobOrder.operationsSegment.operationsDefinition.material.description": "description",
+              "jobOrder.quantity": "Planned Qty",
+              "jobOrder.scheduledDuration": "Sch.Duration",
+              "jobOrder.scheduledEndDateTime": "Planned End",
+              "jobOrder.scheduledStartDateTime": "Planned Start",
+              "operator": "",
+              "produced.quantitySum": "Actual Qty",
+              "rework.quantitySum": "Rework Qty",
+              "scrap": "",
+              "scrap.count": "",
+              "scrap.quantitySum": "Scrap Qty",
+              "startDateTime": "Actual Start"
+            }
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": true,
+            "mode": "reduceFields",
+            "reducers": [
+              "last"
+            ]
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": "GraphQL Data Source",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": null,
+            "filterable": false
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": []
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Actual End"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "dateTimeAsUS"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 6,
+        "x": 18,
+        "y": 20
+      },
+      "id": 15,
+      "options": {
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Actual Duration"
+          }
+        ]
+      },
+      "pluginVersion": "7.5.3",
+      "targets": [
+        {
+          "aliasBy": "",
+          "annotationTags": "",
+          "annotationText": "",
+          "annotationTitle": "",
+          "constant": 6.5,
+          "dataPath": "getEquipment.jobResponses",
+          "endTimePath": "endTime",
+          "groupBy": "",
+          "hide": true,
+          "queryText": "query{\n  getEquipment(id:\"$line\"){\n    id\n    name\n    jobResponses(filter:{endDateTime:{le:\"${__to:date:iso}\"},startDateTime:{ge:\"${__from:date:iso}\"}}){\n      equipment { name }\n      jobOrder{\n        name\n        scheduledStartDateTime\n        scheduledEndDateTime \n        scheduledDuration\n        quantity \n        operationsSegment{\n          duration\n          operationsDefinition{\n            material {\n              code\n              description\n            }\n          }\n        }\n      }\n      startDateTime\n      endDateTime\n      actualDuration \n      downtime:eventsAggregate{\n        count\n        durationSum\n      }\n    }\n  }\n}",
+          "refId": "A",
+          "timeFormat": null,
+          "timePath": "Time"
+        }
+      ],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "Actual End Time",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "actualDuration": true,
+              "downtime.count": true,
+              "downtime.durationSum": true,
+              "endDateTime": false,
+              "equipment.name": true,
+              "jobOrder.name": true,
+              "jobOrder.operationsSegment.duration": true,
+              "jobOrder.operationsSegment.operationsDefinition.material.code": true,
+              "jobOrder.operationsSegment.operationsDefinition.material.description": true,
+              "jobOrder.quantity": true,
+              "jobOrder.scheduledDuration": true,
+              "jobOrder.scheduledEndDateTime": true,
+              "jobOrder.scheduledStartDateTime": true,
+              "produced.count": true,
+              "rework.count": true,
+              "scrap.count": true,
+              "startDateTime": true
+            },
+            "indexByName": {
+              "actualDuration": 8,
+              "downtime.count": 13,
+              "downtime.durationSum": 12,
+              "endDateTime": 6,
+              "equipment.name": 16,
+              "jobOrder.name": 2,
+              "jobOrder.operationsSegment.duration": 17,
+              "jobOrder.operationsSegment.operationsDefinition.material.code": 0,
+              "jobOrder.operationsSegment.operationsDefinition.material.description": 1,
+              "jobOrder.quantity": 9,
+              "jobOrder.scheduledDuration": 7,
+              "jobOrder.scheduledEndDateTime": 4,
+              "jobOrder.scheduledStartDateTime": 3,
+              "produced.count": 15,
+              "produced.quantitySum": 10,
+              "rework.count": 14,
+              "rework.quantitySum": 11,
+              "scrap": 18,
+              "startDateTime": 5
+            },
+            "renameByName": {
+              "actualDuration": "",
+              "createdDateTime": "timestamp",
+              "downtime.count": "",
+              "downtime.durationSum": "Downtime",
+              "endDateTime": "Actual End",
+              "equipment.name": "Equipment",
+              "jobOrder.name": "Order",
+              "jobOrder.operationsSegment.StdRate": "Std. Rate",
+              "jobOrder.operationsSegment.duration": "Std Rate",
+              "jobOrder.operationsSegment.operationsDefinition.material.code": "Material Code",
+              "jobOrder.operationsSegment.operationsDefinition.material.description": "description",
+              "jobOrder.quantity": "Planned Qty",
+              "jobOrder.scheduledDuration": "Sch.Duration",
+              "jobOrder.scheduledEndDateTime": "Sch.End",
+              "jobOrder.scheduledStartDateTime": "Planned Start",
+              "operator": "",
+              "produced.quantitySum": "Actual Qty",
+              "rework.quantitySum": "Rework Qty",
+              "scrap": "",
+              "scrap.count": "",
+              "scrap.quantitySum": "Scrap Qty",
+              "startDateTime": "Actual Start"
+            }
+          }
+        },
+        {
+          "id": "reduce",
+          "options": {
+            "includeTimeField": true,
+            "mode": "reduceFields",
+            "reducers": [
+              "last"
+            ]
+          }
+        }
+      ],
+      "type": "table"
     }
   ],
   "refresh": false,
@@ -1086,9 +1874,13 @@
     "list": [
       {
         "allValue": null,
-        "current": null,
+        "current": {
+          "selected": false,
+          "text": "VIC",
+          "value": "0xeb5"
+        },
         "datasource": null,
-        "definition": "query{\n  queryEquipment(filter:{not:{has:parent}}){\n    name\n  }\n} (queryEquipment)",
+        "definition": "query{\n  queryEquipment(filter:{not:{has:parent},and:{not:{isActive:false}}}){\n    __text: name\n    __value: id\n  }\n} (queryEquipment)",
         "description": "Sites",
         "error": null,
         "hide": 0,
@@ -1097,10 +1889,15 @@
         "multi": false,
         "name": "site",
         "options": [
+          {
+            "selected": true,
+            "text": "VIC",
+            "value": "0xeb5"
+          }
         ],
         "query": {
           "dataPath": "queryEquipment",
-          "queryText": "query{\n  queryEquipment(filter:{not:{has:parent}}){\n    name\n  }\n}"
+          "queryText": "query{\n  queryEquipment(filter:{not:{has:parent},and:{not:{isActive:false}}}){\n    __text: name\n    __value: id\n  }\n}"
         },
         "refresh": 0,
         "regex": "",
@@ -1116,44 +1913,11 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "0xf",
-          "value": "0xf"
+          "text": "FLD",
+          "value": "0xeb7"
         },
-        "datasource": null,
-        "definition": "query{\n  queryEquipment(filter: { name: { eq:\"$site\"}}){\n    id\n  }\n} (queryEquipment)",
-        "description": "gets siteid from site name",
-        "error": null,
-        "hide": 2,
-        "includeAll": false,
-        "label": "siteid",
-        "multi": false,
-        "name": "siteid",
-        "options": [
-          {
-            "selected": true,
-            "text": "0xf",
-            "value": "0xf"
-          }
-        ],
-        "query": {
-          "dataPath": "queryEquipment",
-          "queryText": "query{\n  queryEquipment(filter: { name: { eq:\"$site\"}}){\n    id\n  }\n}"
-        },
-        "refresh": 0,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": null,
-        "datasource": "LibreMfg-ManufacturingGraph",
-        "definition": "query{\n  getEquipment(id:\"$siteid\"){\n    children{\n      name\n    }\n  }\n} (getEquipment.children)",
+        "datasource": "GraphQL Data Source",
+        "definition": "query{\n  getEquipment(id:\"$site\"){\n    children{\n      __text: label\n      __value: id\n    }\n  }\n} (getEquipment.children)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1170,7 +1934,7 @@
           "constant": 6.5,
           "dataPath": "getEquipment.children",
           "groupBy": "",
-          "queryText": "query{\n  getEquipment(id:\"$siteid\"){\n    children{\n      name\n    }\n  }\n}"
+          "queryText": "query{\n  getEquipment(id:\"$site\"){\n    children{\n      __text: label\n      __value: id\n    }\n  }\n}"
         },
         "refresh": 1,
         "regex": "",
@@ -1186,44 +1950,11 @@
         "allValue": null,
         "current": {
           "selected": false,
-          "text": "0x1f",
-          "value": "0x1f"
+          "text": "1L",
+          "value": "0xeb8"
         },
-        "datasource": null,
-        "definition": "query{\n  queryEquipment(filter: { name: { eq:\"$area\"}}){\n    id\n  }\n} (queryEquipment)",
-        "description": null,
-        "error": null,
-        "hide": 2,
-        "includeAll": false,
-        "label": "areaid",
-        "multi": false,
-        "name": "areaid",
-        "options": [
-          {
-            "selected": true,
-            "text": "0x1f",
-            "value": "0x1f"
-          }
-        ],
-        "query": {
-          "dataPath": "queryEquipment",
-          "queryText": "query{\n  queryEquipment(filter: { name: { eq:\"$area\"}}){\n    id\n  }\n}"
-        },
-        "refresh": 0,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": null,
-        "datasource": "LibreMfg-ManufacturingGraph",
-        "definition": "query{\n  getEquipment(id:\"$areaid\"){\n    children{\n      name\n    }\n  }\n} (getEquipment.children)",
+        "datasource": "GraphQL Data Source",
+        "definition": "query{\n  getEquipment(id:\"$area\"){\n    children(filter:{not:{isActive:false}}){\n      __text: label\n      __value: id\n    }\n  }\n} (getEquipment.children)",
         "description": null,
         "error": null,
         "hide": 0,
@@ -1240,7 +1971,7 @@
           "constant": 6.5,
           "dataPath": "getEquipment.children",
           "groupBy": "",
-          "queryText": "query{\n  getEquipment(id:\"$areaid\"){\n    children{\n      name\n    }\n  }\n}"
+          "queryText": "query{\n  getEquipment(id:\"$area\"){\n    children(filter:{not:{isActive:false}}){\n      __text: label\n      __value: id\n    }\n  }\n}"
         },
         "refresh": 1,
         "regex": "",
@@ -1251,53 +1982,16 @@
         "tagsQuery": "",
         "type": "query",
         "useTags": false
-      },
-      {
-        "allValue": null,
-        "current": {
-          "selected": false,
-          "text": "0x4d",
-          "value": "0x4d"
-        },
-        "datasource": null,
-        "definition": "query{\n  queryEquipment(filter: { name: { eq:\"$line\"}}){\n    id\n  } \n} (queryEquipment)",
-        "description": null,
-        "error": null,
-        "hide": 2,
-        "includeAll": false,
-        "label": "lineid",
-        "multi": false,
-        "name": "lineid",
-        "options": [
-          {
-            "selected": true,
-            "text": "0x4d",
-            "value": "0x4d"
-          }
-        ],
-        "query": {
-          "dataPath": "queryEquipment",
-          "queryText": "query{\n  queryEquipment(filter: { name: { eq:\"$line\"}}){\n    id\n  } \n}"
-        },
-        "refresh": 0,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
       }
     ]
   },
   "time": {
-    "from": "2021-01-31T13:00:00.000Z",
-    "to": "2021-02-01T12:59:59.000Z"
+    "from": "now-30d",
+    "to": "now"
   },
   "timepicker": {},
   "timezone": "",
-  "title": "Line Performance",
-  "uid": "libremfg-line-performance-v1",
-  "version": 1
+  "title": "LinePerformance",
+  "uid": "LinePerformance",
+  "version": 4
 }
